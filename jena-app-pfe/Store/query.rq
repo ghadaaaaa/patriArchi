@@ -1,0 +1,66 @@
+
+ 
+
+
+  String qs1 = "Select (count(*) AS ?count) { graph ?g {?s ?p ?o}}";
+  
+  
+  Selectionner tt le graphe:
+   String qs1 = "Select * { graph ?g {?s ?p ?o}}";
+   /***************************Region********************************/
+  *** Rech par Id:
+    int idRegion =2;
+	          String qs1 = "Select  ?nomRegion ?descRegion ?situationRegion where {graph ?g {"
+	          		+ "?Region <http://www.w3.org/ontologies/patriArchi/idRegion> "+ idRegion+" . "
+	          		+ "?Region <http://www.w3.org/ontologies/patriArchi/nomRegion> ?nomRegion ."
+	          		+ "?Region <http://www.w3.org/ontologies/patriArchi/descRegion> ?descRegion ."
+	          		+ "?Region <http://www.w3.org/ontologies/patriArchi/situationRegion> ?situationRegion."
+	          		+ "}}";
+	          		
+  ***Rech par nom:
+ String nomRegion= "Alger";
+ String qs1 = "Select  ?idRegion ?descRegion ?situationRegion where {graph ?g {"
+	          		+ "?Region <http://www.w3.org/ontologies/patriArchi/nomRegion> \""+nomRegion+"\"."
+	          		+ "?Region <http://www.w3.org/ontologies/patriArchi/idRegion> ?idRegion ."
+	          		+ "?Region <http://www.w3.org/ontologies/patriArchi/descRegion> ?descRegion ."
+	          		+ "?Region <http://www.w3.org/ontologies/patriArchi/situationRegion> ?situationRegion."
+	          		+ "}}";
+	          		/***********************/
+	          	 String nomRegion= "Oran";
+	          String qs1 = "Select ?Region where {graph ?g {"
+	          		+ "?Region <http://www.w3.org/ontologies/patriArchi/nomRegion> \""+nomRegion+"\".}}";
+	          		
+	          		/***************/
+	          		Afficher ttes les régions:
+	          		
+	          		 String qs1 = "Select ?Region where {graph ?g {"
+	          		+ "?Region <http://www.w3.org/ontologies/patriArchi/idRegion> ?idRegion.}}";
+	          		
+	          		/********************************RECH ELT PATRI**************************/
+	          		***Rech elt Patri par id
+	           int idEltPatri=1;
+	          String qs1 = "Select ?EltPatri where {graph ?g {"
+	         + "?EltPatri <http://www.w3.org/ontologies/patriArchi/idEltPatri> "+idEltPatri+".}}";
+	         
+	         ***Rech elmet patri par région:
+	         
+	               String qs1 = "Select  ?EltPatri ?Region where {graph ?g {"
+	          		+ "?EltPatri <http://www.w3.org/ontologies/patriArchi/SeSituerEP> ?Region.}}";
+	          		/************/
+	          		
+	          String nomRegion= "Alger";
+	          String qs1 = "Select  ?EltPatri where {graph ?g {"
+	          		+ "?EltPatri <http://www.w3.org/ontologies/patriArchi/SeSituerEP> ?Region."
+	          		+ "?Region <http://www.w3.org/ontologies/patriArchi/nomRegion> \""+nomRegion+"\" ."
+	          		+ "}}";
+	          		
+	          		
+	          		
+	          		
+	          		String qs1 = "Select  ?idEltPatri ?appelEP where {graph ?g {"
+	          + "?EltPatri <http://www.w3.org/ontologies/patriArchi/SeSituerEP> ?Region."
+	          + "?EltPatri <http://www.w3.org/ontologies/patriArchi/S'epplerEP> ?AppellationEP."
+	          + "?EltPatri <http://www.w3.org/ontologies/patriArchi/appelEP> ?appelEP."
+	          + "?Region <http://www.w3.org/ontologies/patriArchi/idRegion> \""+nomRegion+"\" ."
+	         + "}}";
+	        
