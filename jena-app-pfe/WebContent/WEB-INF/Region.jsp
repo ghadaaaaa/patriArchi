@@ -23,7 +23,7 @@
 </head>
 <body>
 
-<!--  <nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
+  <nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
     <div class="container">
  
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" 
@@ -59,16 +59,94 @@
       </div>
     </div>
   
-  </nav> --> 
+  </nav> 
   
 
   <div class="container"> 
      <div class="row">  
  
      <c:forEach var="mon" items="${mons}">
-
-     <c:out value="${ mon.dateConstruction}"/> 
      
+       <div class="text-center bg-faded col-sm-3 ">
+         <br>
+          <h2 class="section-heading mb-4">
+            <span class="section-heading-upper">    
+            <c:out value="Monument historique:"/> 
+            <br> 
+              <c:out value="${ mon.appels[0]}"/> 
+            </span>
+        
+          </h2>
+            <img class=" rounded" src="${mon.images[0]}" alt="">
+          <div class="intro-button mx-auto">
+            <a class="btn btn-primary btn-xl" href="#">Voir Plus</a>
+          </div>
+           <br>
+        </div>
+     </c:forEach> 
+     
+      <c:forEach var="mai" items="${mais}">
+     
+       <div class="text-center bg-faded col-sm-3 ">
+         <br>
+          <h2 class="section-heading mb-4">
+            <span class="section-heading-upper">    
+            <c:out value="Maison traditionnelle:"/> 
+            <br> 
+              <c:out value="${ mai.appels[0]}"/> 
+            </span>
+        
+          </h2>
+            <img class=" rounded" src="${mai.images[0]}" alt="">
+          <div class="intro-button mx-auto">
+            <a class="btn btn-primary btn-xl" href="#">Voir Plus</a>
+          </div>
+           <br>
+        </div>
+     </c:forEach> 
+     
+   
+     
+     
+      <c:forEach var="esp" items="${espaces}">
+     
+       <div class="text-center bg-faded col-sm-3 ">
+         <br>
+          <h2 class="section-heading mb-4">
+            <span class="section-heading-upper">    
+            <c:out value="Espace:"/> 
+            <br> 
+              <c:out value="${ esp.appels[0]}"/> 
+            </span>
+        
+          </h2>
+            <img class=" rounded" src="${esp.images[0]}" alt="">
+          <div class="intro-button mx-auto">
+            <a class="btn btn-primary btn-xl" href="#">Voir Plus</a>
+          </div>
+           <br>
+        </div>
+     </c:forEach> 
+     
+     
+       <c:forEach var="si" items="${sites}">
+     
+       <div class="text-center bg-faded col-sm-3 ">
+         <br>
+          <h2 class="section-heading mb-4">
+            <span class="section-heading-upper">    
+            <c:out value="Site archéologique:"/> 
+            <br> 
+              <c:out value="${ si.appels[0]}"/> 
+            </span>
+        
+          </h2>
+            <img class=" rounded" src="${si.images[0]}" alt="">
+          <div class="intro-button mx-auto">
+            <a class="btn btn-primary btn-xl" href="#">Voir Plus</a>
+          </div>
+           <br>
+        </div>
      </c:forEach> 
 </div>
 </div>

@@ -1,5 +1,7 @@
 package com.ch.model;
 
+import java.util.List;
+
 public class EltPatri 
 {
 	private int idEltPatri;
@@ -9,9 +11,12 @@ public class EltPatri
 	private String longitude;
 	private String dateConstruction;
 	private String périodeConstruction;
+	private List<String> appels;
+	private List<String> images;
 	
 	public EltPatri(int idEltPatri,String descEltPatri,String altitude,String latitude,
-			String longitude, String dateConstruction,String périodeConstruction)
+			String longitude, String dateConstruction,String périodeConstruction, List<String> appels, 
+			List<String> images)
 	{
 		this.idEltPatri=idEltPatri;
 		this.descEltPatri= descEltPatri;
@@ -20,7 +25,30 @@ public class EltPatri
 		this.longitude = longitude;
 		this.dateConstruction = dateConstruction;
 		this.périodeConstruction = périodeConstruction;
+		this.appels =appels;
+		this.images = images;
 	}
+	
+
+	public List<String> getAppels() {
+		return appels;
+	}
+
+
+	public void setAppels(List<String> appels) {
+		this.appels = appels;
+	}
+
+
+	public List<String> getImages() {
+		return images;
+	}
+
+
+	public void setImages(List<String> images) {
+		this.images = images;
+	}
+
 
 	public int getIdEltPatri() {
 		return idEltPatri;

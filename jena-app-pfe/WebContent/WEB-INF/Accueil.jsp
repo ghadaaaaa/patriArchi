@@ -133,7 +133,7 @@
             <span class="section-heading-upper">Les monuments<br> historiques</span>
         
           </h2>
-            <img class=" rounded" src="img/Timgad.jpeg" alt="">
+            <img class=" rounded" src="img/Martyrs.jpg" alt="">
           <div class="intro-button mx-auto">
             <a class="btn btn-primary btn-xl" href="#">Voir Plus</a>
           </div>

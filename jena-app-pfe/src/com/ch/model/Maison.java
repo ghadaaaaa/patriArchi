@@ -1,5 +1,7 @@
 package com.ch.model;
 
+import java.util.List;
+
 public class Maison  extends EltPatri
 {
 	
@@ -8,10 +10,11 @@ public class Maison  extends EltPatri
 
 	public Maison(int idEltPatri,String descEltPatri,String altitude,String latitude,
 			String longitude, String dateConstruction,String périodeConstruction, 
-			String surfaceSol, String surfaceMaison)
+			String surfaceSol, String surfaceMaison,List<String> appels, 
+			List<String> images)
 	{
 		super(idEltPatri,descEltPatri,altitude,latitude,longitude,
-				dateConstruction,périodeConstruction);
+				dateConstruction,périodeConstruction,  appels,  images);
 		
 		this.surfaceSol= surfaceSol;
 		this.surfaceMaison = surfaceMaison;

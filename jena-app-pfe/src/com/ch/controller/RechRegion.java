@@ -19,55 +19,7 @@ public class RechRegion
 {
 	public RechRegion() {}
 	
-	public List<Region> listerRegion(Dataset dataset)
-	{
-
-	   dataset.begin(ReadWrite.READ) ;
-		 try
-		
-		 {
-			   String qs1 = "Select ?idRegion ?nomRegion ?descRegion ?situationRegion where {graph ?g {"
-			 + "?Region <http://www.w3.org/ontologies/patriArchi/idRegion> ?idRegion."
-			 + "?Region <http://www.w3.org/ontologies/patriArchi/nomRegion> ?nomRegion."
-			 + "?Region <http://www.w3.org/ontologies/patriArchi/descRegion> ?descRegion."
-			 + "?Region <http://www.w3.org/ontologies/patriArchi/situationRegion> ?situationRegion."
-			 + "}}";
-	       
-		
-			   try(QueryExecution qExec = QueryExecutionFactory.create(qs1, dataset)) {
-			   ResultSet rs = qExec.execSelect() ;
-			  
-			    int id =0;
-			    String nom="";
-				String desc ="";
-				String situation ="";
-				List<Region> regs= new ArrayList<Region>();
-				QuerySolution soln;
-				RDFNode node;
-			   while (rs.hasNext()){
-				    soln = rs.nextSolution() ;
-				    node= soln.get("idRegion") ;  id = (int)node.asNode().getLiteralValue();
-				 
-				    
-				    node = soln.get("nomRegion") ; nom = node.toString();
-				 
-				    
-				    node = soln.get("descRegion") ; desc = node.toString();
-
-				    
-				    node = soln.get("situationRegion") ; situation = node.toString();
-				   
-				    
-					Region reg = new Region(id, nom, desc, situation);
-					regs.add(reg);
-				 }
-			
-				return regs;
-			   
-			 }
-		 } 
-		 finally { dataset.end() ; }
-	}
+	
 	      //********************************************************//
 		 
 		 public Region rechRegionParId (Dataset dataset, int idRegion)

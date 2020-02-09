@@ -12,9 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyStorageException;
 
-import com.ch.controller.RechMonument;
-
+import com.ch.controller.Recherches;
+import com.ch.model.Espace;
+import com.ch.model.Maison;
 import com.ch.model.Monument;
+import com.ch.model.Site;
 import com.ch.ontology.Ontology;
 
 /**
@@ -55,12 +57,19 @@ public class Region extends HttpServlet {
 		
 		String nomReg =request.getParameter("nom_reg");
 		System.out.println(nomReg);
-	    RechMonument rechMon = new RechMonument();
-	    List<Monument> mons= rechMon.rechMonumentParRegion(ont.getDataset(),nomReg);
-	
+	    Recherches rech = new Recherches();
+
+	    List<Monument> mons= rech.rechMonumentParRegion(ont.getDataset(),nomReg);
+	    List<Maison> mais = rech.rechMaisonParRegion(ont.getDataset(), nomReg);
+	    List<Site>  sites = rech.rechSiteParRegion(ont.getDataset(), nomReg);
+	    List<Espace> espaces = rech.rechEspaceParRegion(ont.getDataset(), nomReg);
+	   
 	    request.setAttribute("mons", mons);
+	    request.setAttribute("mais", mais);
+	    request.setAttribute("sites", sites);
+	    request.setAttribute("espaces", espaces);
 	    
-	    
+
 		this.getServletContext().getRequestDispatcher(VUE).forward( request, response );
 	}
 

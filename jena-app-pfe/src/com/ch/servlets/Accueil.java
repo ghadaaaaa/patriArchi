@@ -50,9 +50,6 @@ public class Accueil extends HttpServlet {
 			e.printStackTrace();
 		}
 		ont.loadTtlFileInTDB();
-		RechRegion rechReg = new RechRegion();
-		List<Region> regs= rechReg.listerRegion(ont.getDataset());
-		 request.setAttribute("regs",regs);
 
 		
 		this.getServletContext().getRequestDispatcher(VUE).forward( request, response );
