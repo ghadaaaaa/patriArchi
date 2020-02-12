@@ -35,56 +35,26 @@
   </h1>
 
   <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
-    <div class="container">
+<%@include file="header.jsp" %>
  
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" 
-      aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav mx-auto">
-          <li class="nav-item active px-lg-4">
-            <a class="nav-link text-uppercase text-expanded" href="#">Accueil
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="nav-item px-lg-4">
-            <a class="nav-link text-uppercase text-expanded" href="Region">Les Espaces </a>
-           
-          </li>
-          <li class="nav-item px-lg-4">
-            <a class="nav-link text-uppercase text-expanded" href="#">Les Maisons traditionnelles</a>
-          </li>
-          <li class="nav-item px-lg-4">
-            <a class="nav-link text-uppercase text-expanded" href="#">Les Monuments historiques</a>
-          </li>
-          <li class="nav-item px-lg-4">
-            <a class="nav-link text-uppercase text-expanded" href="#">Les Sites archéologiques</a>
-          </li>
-           <li class="nav-item px-lg-4">
-            <a class="nav-link text-uppercase text-expanded" href="#">Contact</a>
-          </li>
-          
-          
-        </ul>
-      </div>
-    </div>
-  
-  </nav>
- 
-       
+      
       <div class=" page-section text-center ">
         <div class="col-xl-6xl-auto text-center">
-          <div class="cta-inner rounded text-center">
+         <form method="Post" action="MotCle">
+          <div class=" form-group rounded text-center  mx-auto ">
             <label></label>
                 <input class="rounded champ text-center" id="keyWord" name="keyWord" placeholder="Recherche par mot clé" >
            
-          </div>
+            <button type="submit" class="btn btn-primary btn-xl">Chercher</button>
+             </div>
+        
+              </form>
+     
        </div>
         </div>
+   
 
-          <div class="  row   ">
+          <div class="row">
 
          <div class="text-center bg-faded col-sm-3 ">
          <br>
@@ -94,7 +64,7 @@
           </h2>
             <img class=" rounded" src="img/Timgad.jpeg" alt="">
           <div class="intro-button mx-auto">
-            <a class="btn btn-primary btn-xl" href="#">Voir Plus</a>
+            <a class="btn btn-primary btn-xl" href="Maisons">Voir Plus</a>
           </div>
            <br>
         </div>
@@ -108,7 +78,7 @@
           </h2>
             <img class=" rounded" src="img/Timgad.jpeg" alt="">
           <div class="intro-button mx-auto">
-            <a class="btn btn-primary btn-xl" href="#">Voir Plus</a>
+            <a class="btn btn-primary btn-xl" href="Espaces">Voir Plus</a>
           </div>
            <br>
         </div>
@@ -122,7 +92,7 @@
           </h2>
             <img class=" rounded" src="img/Timgad.jpeg" alt="">
           <div class="intro-button mx-auto">
-            <a class="btn btn-primary btn-xl" href="#">Voir Plus</a>
+            <a class="btn btn-primary btn-xl" href="Sites">Voir Plus</a>
           </div>
            <br>
         </div>
@@ -135,7 +105,7 @@
           </h2>
             <img class=" rounded" src="img/Martyrs.jpg" alt="">
           <div class="intro-button mx-auto">
-            <a class="btn btn-primary btn-xl" href="#">Voir Plus</a>
+            <a class="btn btn-primary btn-xl" href="Monuments">Voir Plus</a>
           </div>
            <br>
         </div>
@@ -179,46 +149,8 @@
   
 
 
-
-  <footer class="footer text-faded text-center py-5">
-    <div class="container">
-
-           
-                  <img src="img/Turath.png" alt="">
-                   
-                        <div class="footer_widget">
-                            <h3 class="footer_title">
-                                 
-                            </h3>
-                            <p class="footer_text"> Un travail conçu pour la préservation du patrimoine architectural Algérien.
-                              <br>
-                               Développé par: FLISSI Ghada et SLATNIA Chahinez  
-                              <p class="footer_text"> Contactez-nous: Turath@gmail.dz</p>
-                             
-                               </div>
-                   
-               
-                        <div class="socail_links">
-                           
-                                
-                                    <a href="#">
-                                        <i class="fa fa-facebook-square"></i>
-                                    </a>
-                                
-                                    <a href="#">
-                                        <i class="fa fa-twitter"></i>
-                                    </a>
-                               
-                              
-                                    <a href="#">
-                                        <i class="fa fa-instagram"></i>
-                                    </a>
-                              
-                        </div>
-                   
-                </div>
-  
-  </footer>
+<%@include file="footer.jsp" %>
+ 
 
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>

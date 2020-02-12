@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Region</title>
+  <title>Liste Monuments</title>
 
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -22,8 +22,7 @@
   <link href="css/business-casual.min.css" rel="stylesheet">
 </head>
 <body>
-
-  <nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
+ <nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
     <div class="container">
  
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" 
@@ -33,19 +32,19 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav mx-auto">
           <li class="nav-item active px-lg-4">
-            <a class="nav-link text-uppercase text-expanded" href="#">Accueil
+            <a class="nav-link text-uppercase text-expanded" href="Accueil">Accueil
               <span class="sr-only">(current)</span>
             </a>
           </li>
           <li class="nav-item px-lg-4">
-            <a class="nav-link text-uppercase text-expanded" href="Region">Les Espaces </a>
+            <a class="nav-link text-uppercase text-expanded" href="#">Les Espaces </a>
            
           </li>
           <li class="nav-item px-lg-4">
-            <a class="nav-link text-uppercase text-expanded" href="#">Les Maisons traditionnelles</a>
+            <a class="nav-link text-uppercase text-expanded" href="Maisons">Les Maisons traditionnelles</a>
           </li>
           <li class="nav-item px-lg-4">
-            <a class="nav-link text-uppercase text-expanded" href="#">Les Monuments historiques</a>
+            <a class="nav-link text-uppercase text-expanded" href="Monuments">Les Monuments historiques</a>
           </li>
           <li class="nav-item px-lg-4">
             <a class="nav-link text-uppercase text-expanded" href="#">Les Sites archéologiques</a>
@@ -60,10 +59,9 @@
     </div>
   
   </nav> 
-  
-<br>
-<br>
-  <div class="container"> 
+  <br>
+  <br>
+<div class="container"> 
      <div class="row">  
  
      <c:forEach var="mon" items="${mons}">
@@ -71,84 +69,34 @@
        <div class="text-center bg-faded col-sm-3 ">
          <br>
           <h2 class="section-heading mb-4">
-            <span class="section-heading-upper">    
-            <c:out value="Monument historique:"/> 
+            <span class="section-heading-upper">   
+            
             <br> 
-              <c:out value="${ mon.appels[0]}"/> 
+             <c:if test = "${!mon.appels.isEmpty()}">
+              <c:out value="${ mon.appels[0]}"/>
+              </c:if> 
             </span>
         
           </h2>
+           <c:if test = "${!mon.images.isEmpty()}">
             <img class=" rounded" src="${mon.images[0]}" alt="">
+            </c:if>
+            <c:if test = "${mon.images.isEmpty()}">
+            </c:if>
           <div class="intro-button mx-auto">
-            <a class="btn btn-primary btn-xl" href="#">Voir Plus</a>
+            <a class="btn btn-primary btn-xl" href="Monument">Voir Plus</a>
           </div>
            <br>
         </div>
      </c:forEach> 
+
+   
      
-      <c:forEach var="mai" items="${mais}">
-     
-       <div class="text-center bg-faded col-sm-3 ">
-         <br>
-          <h2 class="section-heading mb-4">
-            <span class="section-heading-upper">    
-            <c:out value="Maison traditionnelle:"/> 
-            <br> 
-              <c:out value="${ mai.appels[0]}"/> 
-            </span>
-        
-          </h2>
-            <img class=" rounded" src="${mai.images[0]}" alt="">
-          <div class="intro-button mx-auto">
-            <a class="btn btn-primary btn-xl" href="#">Voir Plus</a>
-          </div>
-           <br>
-        </div>
-     </c:forEach> 
      
    
      
      
-      <c:forEach var="esp" items="${espaces}">
-     
-       <div class="text-center bg-faded col-sm-3 ">
-         <br>
-          <h2 class="section-heading mb-4">
-            <span class="section-heading-upper">    
-            <c:out value="Espace:"/> 
-            <br> 
-              <c:out value="${ esp.appels[0]}"/> 
-            </span>
-        
-          </h2>
-            <img class=" rounded" src="${esp.images[0]}" alt="">
-          <div class="intro-button mx-auto">
-            <a class="btn btn-primary btn-xl" href="#">Voir Plus</a>
-          </div>
-           <br>
-        </div>
-     </c:forEach> 
-     
-     
-       <c:forEach var="si" items="${sites}">
-     
-       <div class="text-center bg-faded col-sm-3 ">
-         <br>
-          <h2 class="section-heading mb-4">
-            <span class="section-heading-upper">    
-            <c:out value="Site archéologique:"/> 
-            <br> 
-              <c:out value="${ si.appels[0]}"/> 
-            </span>
-        
-          </h2>
-            <img class=" rounded" src="${si.images[0]}" alt="">
-          <div class="intro-button mx-auto">
-            <a class="btn btn-primary btn-xl" href="#">Voir Plus</a>
-          </div>
-           <br>
-        </div>
-     </c:forEach> 
+      
 </div>
 </div>
 
@@ -157,8 +105,5 @@
        <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script> 
-
-
 </body>
-
 </html>

@@ -13,6 +13,43 @@
 
 
 <servlet>
+<servlet-name>Espace</servlet-name>
+<servlet-class>com.ch.servlets.Espace</servlet-class>
+</servlet>
+ <servlet-mapping>
+<servlet-name>Espace</servlet-name>
+<url-pattern>/Espace</url-pattern>
+</servlet-mapping>
+
+
+<servlet>
+<servlet-name>Site</servlet-name>
+<servlet-class>com.ch.servlets.Site</servlet-class>
+</servlet>
+ <servlet-mapping>
+<servlet-name>Site</servlet-name>
+<url-pattern>/Site</url-pattern>
+</servlet-mapping>
+
+<servlet>
+<servlet-name>Monument</servlet-name>
+<servlet-class>com.ch.servlets.Monument</servlet-class>
+</servlet>
+ <servlet-mapping>
+<servlet-name>Monument</servlet-name>
+<url-pattern>/Monument</url-pattern>
+</servlet-mapping>
+
+<servlet>
+<servlet-name>Contact</servlet-name>
+<servlet-class>com.ch.servlets.Contact</servlet-class>
+</servlet>
+ <servlet-mapping>
+<servlet-name>Contact</servlet-name>
+<url-pattern>/Conatact</url-pattern>
+</servlet-mapping>
+
+<servlet>
 <servlet-name>Region</servlet-name>
 <servlet-class>com.ch.servlets.Region</servlet-class>
 </servlet>
@@ -20,6 +57,64 @@
 <servlet-name>Region</servlet-name>
 <url-pattern>/Region</url-pattern>
 </servlet-mapping>
+
+
+<servlet>
+<servlet-name>MotCle</servlet-name>
+<servlet-class>com.ch.servlets.MotCle</servlet-class>
+</servlet>
+ <servlet-mapping>
+<servlet-name>MotCle</servlet-name>
+<url-pattern>/MotCle</url-pattern>
+</servlet-mapping>
+
+
+<servlet>
+<servlet-name>Maisons</servlet-name>
+<servlet-class>com.ch.servlets.Maisons</servlet-class>
+</servlet>
+ <servlet-mapping>
+<servlet-name>Maisons</servlet-name>
+<url-pattern>/Maisons</url-pattern>
+</servlet-mapping>
+
+<servlet>
+<servlet-name>Monuments</servlet-name>
+<servlet-class>com.ch.servlets.Monuments</servlet-class>
+</servlet>
+ <servlet-mapping>
+<servlet-name>Monuments</servlet-name>
+<url-pattern>/Monuments</url-pattern>
+</servlet-mapping>
+
+<servlet>
+<servlet-name>Espaces</servlet-name>
+<servlet-class>com.ch.servlets.Espaces</servlet-class>
+</servlet>
+ <servlet-mapping>
+<servlet-name>Espaces</servlet-name>
+<url-pattern>/Espaces</url-pattern>
+</servlet-mapping>
+
+<servlet>
+<servlet-name>Sites</servlet-name>
+<servlet-class>com.ch.servlets.Sites</servlet-class>
+</servlet>
+ <servlet-mapping>
+<servlet-name>Sites</servlet-name>
+<url-pattern>/Sites</url-pattern>
+</servlet-mapping>
+
+
+<servlet>
+<servlet-name>Maison</servlet-name>
+<servlet-class>com.ch.servlets.Maison</servlet-class>
+</servlet>
+ <servlet-mapping>
+<servlet-name>Maison</servlet-name>
+<url-pattern>/Maison</url-pattern>
+</servlet-mapping>
+
 
 
 </web-app>

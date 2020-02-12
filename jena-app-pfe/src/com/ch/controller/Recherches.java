@@ -144,6 +144,116 @@ public class Recherches {
 	 }
 	 
 	 
+	 /******************************Liste des espaces*********************************/
+	 public List<Espace> listeEspace (Dataset dataset)
+	 {
+		 dataset.begin(ReadWrite.READ) ;
+		 try
+		
+		 {
+			  String qs1 = "Select ?idEltPatri ?descEltPatri ?altitude ?latitude"
+			  		+ "?longitude ?dateConstruction  ?périodeConstruction ?typeEspace where {graph ?g {"          
+	          + "?Espace  <http://www.w3.org/ontologies/patriArchi/idEltPatri> ?idEltPatri." 
+	          + "?Espace  <http://www.w3.org/ontologies/patriArchi/descEltPatri> ?descEltPatri." 
+	          + "?Espace  <http://www.w3.org/ontologies/patriArchi/altitude> ?altitude." 
+	          + "?Espace  <http://www.w3.org/ontologies/patriArchi/latitude> ?latitude." 
+	          + "?Espace  <http://www.w3.org/ontologies/patriArchi/longitude> ?longitude." 
+	          + "?Espace <http://www.w3.org/ontologies/patriArchi/dateConstruction> ?dateConstruction."
+	          + "?Espace <http://www.w3.org/ontologies/patriArchi/périodeConstruction> ?périodeConstruction."
+	          + "?Espace  <http://www.w3.org/ontologies/patriArchi/TypeEspace> ?TypeEspace." 
+	         + "}}";
+
+			   try(QueryExecution qExec = QueryExecutionFactory.create(qs1, dataset)) {
+			   ResultSet rs = qExec.execSelect() ;
+			 //  ResultSetFormatter.out(rs) ;
+			   QuerySolution soln;
+			   RDFNode node;
+			   Espace espace;
+			   List<Espace> espaces = new ArrayList<Espace>();
+			   List<String> appels;
+			   List<String> images;
+			   while(rs.hasNext()){
+				    soln = rs.nextSolution() ;
+				    node = soln.get("idEltPatri") ;int idEltPatri = (int)node.asNode().getLiteralValue();
+				    appels = rechAppelEP(dataset,idEltPatri);
+				    images = rechImagesEP(dataset, idEltPatri);
+				    node = soln.get("descEltPatri"); String descEltPatri = node.toString();
+				    node = soln.get("altitude"); String altitude = node.toString();
+				    node = soln.get("latitude"); String latitude = node.toString();
+				    node = soln.get("longitude"); String longitude = node.toString();
+				    node = soln.get("dateConstruction"); String dateConstruction = node.toString();
+				    node = soln.get("périodeConstruction"); String périodeConstruction = node.toString();
+				    node = soln.get("typeEspace"); String typeEspace = node.toString();
+				    espace= new Espace(idEltPatri,descEltPatri,altitude,latitude,longitude,
+				    		dateConstruction,périodeConstruction, typeEspace, appels, images);
+				  
+				    espaces.add(espace);
+				    }
+		
+			   return espaces;
+			 }
+		 } 
+		 finally { dataset.end() ; }
+	 }
+	 
+	 /************************RECHERCHE ESPACE PAR APPELLATION EP*****************/
+	 public List<Espace> rechEspaceParAppel( Dataset dataset, String  appel)
+	 {
+		 
+		 dataset.begin(ReadWrite.READ) ;
+		 try
+		
+		 {
+			  String qs1 = "Select ?idEltPatri ?descEltPatri ?altitude ?latitude"
+			  		+ "?longitude ?dateConstruction  ?périodeConstruction ?typeEspace where {graph ?g {"
+			 
+	          + "?Espace <http://www.w3.org/ontologies/patriArchi/SappelerEP> ?AppellationEP."          
+	          + "?Espace  <http://www.w3.org/ontologies/patriArchi/idEltPatri> ?idEltPatri." 
+	          + "?Espace  <http://www.w3.org/ontologies/patriArchi/descEltPatri> ?descEltPatri." 
+	          + "?Espace  <http://www.w3.org/ontologies/patriArchi/altitude> ?altitude." 
+	          + "?Espace  <http://www.w3.org/ontologies/patriArchi/latitude> ?latitude." 
+	          + "?Espace  <http://www.w3.org/ontologies/patriArchi/longitude> ?longitude." 
+	          + "?Espace <http://www.w3.org/ontologies/patriArchi/dateConstruction> ?dateConstruction."
+	          + "?Espace <http://www.w3.org/ontologies/patriArchi/périodeConstruction> ?périodeConstruction."
+	          + "?Espace  <http://www.w3.org/ontologies/patriArchi/TypeEspace> ?TypeEspace." 
+	          + "?AppellationEP <http://www.w3.org/ontologies/patriArchi/appelEP> \""+appel+"\" ."
+	         + "}}";
+
+			   try(QueryExecution qExec = QueryExecutionFactory.create(qs1, dataset)) {
+			   ResultSet rs = qExec.execSelect() ;
+			 //  ResultSetFormatter.out(rs) ;
+			   QuerySolution soln;
+			   RDFNode node;
+			   Espace espace;
+			   List<Espace> espaces = new ArrayList<Espace>();
+			   List<String> appels;
+			   List<String> images;
+			   while(rs.hasNext()){
+				    soln = rs.nextSolution() ;
+				    node = soln.get("idEltPatri") ;int idEltPatri = (int)node.asNode().getLiteralValue();
+				    appels = rechAppelEP(dataset,idEltPatri);
+				    images = rechImagesEP(dataset, idEltPatri);
+				    node = soln.get("descEltPatri"); String descEltPatri = node.toString();
+				    node = soln.get("altitude"); String altitude = node.toString();
+				    node = soln.get("latitude"); String latitude = node.toString();
+				    node = soln.get("longitude"); String longitude = node.toString();
+				    node = soln.get("dateConstruction"); String dateConstruction = node.toString();
+				    node = soln.get("périodeConstruction"); String périodeConstruction = node.toString();
+				    node = soln.get("typeEspace"); String typeEspace = node.toString();
+				    espace= new Espace(idEltPatri,descEltPatri,altitude,latitude,longitude,
+				    		dateConstruction,périodeConstruction, typeEspace, appels, images);
+				  
+				    espaces.add(espace);
+				    }
+		
+			   return espaces;
+			 }
+		 } 
+		 finally { dataset.end() ; }
+		 
+	 }
+	 
+	 
 /************************************MAISON***********************************/
 	 
 	 public List<Maison> rechMaisonParRegion (Dataset dataset, String nomRegion)
@@ -202,8 +312,112 @@ public class Recherches {
 		 } 
 		 finally { dataset.end() ; }
 	 }
-	 
-	 
+	 /***************************Recherche Maison Par Appellation******************************************/
+	public List<Maison> rechMaisonParAppel(Dataset dataset, String appel)
+	{
+		 dataset.begin(ReadWrite.READ) ;
+		 try
+		
+		 { String qs1 = "Select ?idEltPatri ?descEltPatri ?altitude ?latitude"
+			  		+ "?longitude ?dateConstruction  ?périodeConstruction ?surfaceSol ?surfaceMaison "
+			  		+ "where {graph ?g {"
+	          + "?Maison <http://www.w3.org/ontologies/patriArchi/Sappeler> ?AppellationEP."          
+	          + "?Maison <http://www.w3.org/ontologies/patriArchi/idEltPatri> ?idEltPatri." 
+	          + "?Maison <http://www.w3.org/ontologies/patriArchi/descEltPatri> ?descEltPatri." 
+	          + "?Maison <http://www.w3.org/ontologies/patriArchi/altitude> ?altitude." 
+	          + "?Maison <http://www.w3.org/ontologies/patriArchi/latitude> ?latitude." 
+	          + "?Maison <http://www.w3.org/ontologies/patriArchi/longitude> ?longitude." 
+	          + "?Maison <http://www.w3.org/ontologies/patriArchi/dateConstruction> ?dateConstruction."
+	          + "?Maison <http://www.w3.org/ontologies/patriArchi/périodeConstruction> ?périodeConstruction."
+	          + "?Maison <http://www.w3.org/ontologies/patriArchi/surfaceSol> ?surfaceSol."
+	          + "?Maison <http://www.w3.org/ontologies/patriArchi/surfaceMaison> ?surfaceMaison."
+	          + "?AppellationEP <http://www.w3.org/ontologies/patriArchi/appelEP> \""+appel+"\" ."
+	         + "}}";
+			   try(QueryExecution qExec = QueryExecutionFactory.create(qs1, dataset)) {
+			   ResultSet rs = qExec.execSelect() ;
+			   QuerySolution soln;
+			   RDFNode node;
+			   Maison mai;
+			   List<Maison> mais = new ArrayList<Maison>();
+			
+			   List<String> appels;
+			   List<String> images;
+			   while(rs.hasNext()){
+				    soln = rs.nextSolution() ;
+				    node = soln.get("idEltPatri") ;int idEltPatri = (int)node.asNode().getLiteralValue();
+				    appels = rechAppelEP(dataset,idEltPatri);
+				    images =rechImagesEP(dataset, idEltPatri);
+				    node = soln.get("descEltPatri"); String descEltPatri = node.toString();
+				    node = soln.get("altitude"); String altitude = node.toString();
+				    node = soln.get("latitude"); String latitude = node.toString();
+				    node = soln.get("longitude"); String longitude = node.toString();
+				    node = soln.get("dateConstruction"); String dateConstruction = node.toString();
+				    node = soln.get("périodeConstruction"); String périodeConstruction = node.toString();
+				    node = soln.get("surfaceSol"); String surfaceSol = node.toString();
+				    node = soln.get("surfaceMaison"); String surfaceMaison = node.toString();
+				    mai= new Maison(idEltPatri,descEltPatri,altitude,latitude,longitude,
+				    		dateConstruction,périodeConstruction,surfaceSol, surfaceMaison,appels, images );
+				  
+				    mais.add(mai);
+				    }
+			   return mais;
+			 }
+		 } 
+		 finally { dataset.end() ; }
+	}
+	 /********************************Liste toutes les maisons**********************/
+	 public List<Maison> listeMaison(Dataset dataset)
+		{
+		   dataset.begin(ReadWrite.READ) ;
+			 try
+			
+			 {
+				 String qs1 = "Select ?idEltPatri ?descEltPatri ?altitude ?latitude"
+					  		+ "?longitude ?dateConstruction  ?périodeConstruction ?surfaceSol ?surfaceMaison "
+					  		+ "where {graph ?g {"        
+			          + "?Maison <http://www.w3.org/ontologies/patriArchi/idEltPatri> ?idEltPatri." 
+			          + "?Maison <http://www.w3.org/ontologies/patriArchi/descEltPatri> ?descEltPatri." 
+			          + "?Maison <http://www.w3.org/ontologies/patriArchi/altitude> ?altitude." 
+			          + "?Maison <http://www.w3.org/ontologies/patriArchi/latitude> ?latitude." 
+			          + "?Maison <http://www.w3.org/ontologies/patriArchi/longitude> ?longitude." 
+			          + "?Maison <http://www.w3.org/ontologies/patriArchi/dateConstruction> ?dateConstruction."
+			          + "?Maison <http://www.w3.org/ontologies/patriArchi/périodeConstruction> ?périodeConstruction."
+			          + "?Maison <http://www.w3.org/ontologies/patriArchi/surfaceSol> ?surfaceSol."
+			          + "?Maison <http://www.w3.org/ontologies/patriArchi/surfaceMaison> ?surfaceMaison."
+			      
+			         + "}}";
+				 try(QueryExecution qExec = QueryExecutionFactory.create(qs1, dataset)) {
+					   ResultSet rs = qExec.execSelect() ;
+					   QuerySolution soln;
+					   RDFNode node;
+					   Maison mai;
+					   List<Maison> mais = new ArrayList<Maison>();
+					
+					   List<String> appels;
+					   List<String> images;
+					   while(rs.hasNext()){
+						    soln = rs.nextSolution() ;
+						    node = soln.get("idEltPatri") ;int idEltPatri = (int)node.asNode().getLiteralValue();
+						    appels = rechAppelEP(dataset,idEltPatri);
+						    images =rechImagesEP(dataset, idEltPatri);
+						    node = soln.get("descEltPatri"); String descEltPatri = node.toString();
+						    node = soln.get("altitude"); String altitude = node.toString();
+						    node = soln.get("latitude"); String latitude = node.toString();
+						    node = soln.get("longitude"); String longitude = node.toString();
+						    node = soln.get("dateConstruction"); String dateConstruction = node.toString();
+						    node = soln.get("périodeConstruction"); String périodeConstruction = node.toString();
+						    node = soln.get("surfaceSol"); String surfaceSol = node.toString();
+						    node = soln.get("surfaceMaison"); String surfaceMaison = node.toString();
+						    mai= new Maison(idEltPatri,descEltPatri,altitude,latitude,longitude,
+						    		dateConstruction,périodeConstruction,surfaceSol, surfaceMaison,appels, images );
+						  
+						    mais.add(mai);
+						    }
+					   return mais;
+					 }
+				 } 
+				 finally { dataset.end() ; }
+		 }
 	 
 	 /******************************SITE*************************************/
 	 public List<Site> rechSiteParRegion (Dataset dataset, String nomRegion)
@@ -213,7 +427,7 @@ public class Recherches {
 		
 		 {
 			  String qs1 = "Select ?idEltPatri ?descEltPatri ?altitude ?latitude"
-			  		+ "?longitude ?dateConstruction  ?périodeConstruction where {graph ?g {"
+			  		+ "?longitude ?dateConstruction  ?périodeConstruction ?surfaceSite where {graph ?g {"
 			 
 	          + "?Site <http://www.w3.org/ontologies/patriArchi/SeSituerEP> ?Region."          
 	          + "?Site <http://www.w3.org/ontologies/patriArchi/idEltPatri> ?idEltPatri." 
@@ -223,6 +437,7 @@ public class Recherches {
 	          + "?Site <http://www.w3.org/ontologies/patriArchi/longitude> ?longitude." 
 	          + "?Site <http://www.w3.org/ontologies/patriArchi/dateConstruction> ?dateConstruction."
 	          + "?Site <http://www.w3.org/ontologies/patriArchi/périodeConstruction> ?périodeConstruction."
+	          + "?Site <http://www.w3.org/ontologies/patriArchi/surfaceSite> ?surfaceSite."
 	          + "?Region <http://www.w3.org/ontologies/patriArchi/nomRegion> \""+nomRegion+"\" ."
 	         + "}}";
 
@@ -247,9 +462,121 @@ public class Recherches {
 				    node = soln.get("longitude"); String longitude = node.toString();
 				    node = soln.get("dateConstruction"); String dateConstruction = node.toString();
 				    node = soln.get("périodeConstruction"); String périodeConstruction = node.toString();
+				    node = soln.get("surfaceSite"); String surfaceSite = node.toString();
 				    site= new Site(idEltPatri,descEltPatri,altitude,latitude,longitude,
-				    		dateConstruction,périodeConstruction, appels,images);
+				    		dateConstruction,périodeConstruction, surfaceSite, appels,images);
 				  
+				    sites.add(site);
+				    }
+		
+			   return sites;
+			 }
+		 } 
+		 finally { dataset.end() ; }
+	 }
+	 
+	 
+	 
+	 /******************************LISTE SITES*************************************/
+	 public List<Site> listeSite (Dataset dataset)
+	 {
+		 dataset.begin(ReadWrite.READ) ;
+		 try
+		
+		 {
+			  String qs1 = "Select ?idEltPatri ?descEltPatri ?altitude ?latitude"
+			  		+ "?longitude ?dateConstruction  ?périodeConstruction ?surfaceSite where {graph ?g {"       
+	          + "?Site <http://www.w3.org/ontologies/patriArchi/idEltPatri> ?idEltPatri." 
+	          + "?Site <http://www.w3.org/ontologies/patriArchi/descEltPatri> ?descEltPatri." 
+	          + "?Site <http://www.w3.org/ontologies/patriArchi/altitude> ?altitude." 
+	          + "?Site <http://www.w3.org/ontologies/patriArchi/latitude> ?latitude." 
+	          + "?Site <http://www.w3.org/ontologies/patriArchi/longitude> ?longitude." 
+	          + "?Site <http://www.w3.org/ontologies/patriArchi/dateConstruction> ?dateConstruction."
+	          + "?Site <http://www.w3.org/ontologies/patriArchi/périodeConstruction> ?périodeConstruction."
+	          + "?Site <http://www.w3.org/ontologies/patriArchi/surfaceSite> ?surfaceSite."
+	         + "}}";
+
+			   try(QueryExecution qExec = QueryExecutionFactory.create(qs1, dataset)) {
+			   ResultSet rs = qExec.execSelect() ;
+			 //  ResultSetFormatter.out(rs) ;
+			   QuerySolution soln;
+			   RDFNode node;
+			   Site site;
+			   List<Site> sites = new ArrayList<Site>();
+			   List<String> appels;
+			   List<String> images;
+			
+			   while(rs.hasNext()){
+				    soln = rs.nextSolution() ;
+				    node = soln.get("idEltPatri") ;int idEltPatri = (int)node.asNode().getLiteralValue();
+				    appels = rechAppelEP(dataset,idEltPatri);
+				    images =rechImagesEP(dataset, idEltPatri);
+				    node = soln.get("descEltPatri"); String descEltPatri = node.toString();
+				    node = soln.get("altitude"); String altitude = node.toString();
+				    node = soln.get("latitude"); String latitude = node.toString();
+				    node = soln.get("longitude"); String longitude = node.toString();
+				    node = soln.get("dateConstruction"); String dateConstruction = node.toString();
+				    node = soln.get("périodeConstruction"); String périodeConstruction = node.toString();
+				    node = soln.get("surfaceSite"); String surfaceSite = node.toString();
+				    site= new Site(idEltPatri,descEltPatri,altitude,latitude,longitude,
+				    		dateConstruction,périodeConstruction, surfaceSite, appels,images);
+				  
+				    sites.add(site);
+				    }
+		
+			   return sites;
+			 }
+		 } 
+		 finally { dataset.end() ; }
+	 }
+	 
+	 /********************Recherche Site Par Appellation EP***************************/
+	 
+	 public List<Site> rechSiteParAppel(Dataset dataset, String appel)
+	 {
+		 dataset.begin(ReadWrite.READ) ;
+		 try
+		
+		 {
+			  String qs1 = "Select ?idEltPatri ?descEltPatri ?altitude ?latitude"
+			  		+ "?longitude ?dateConstruction  ?périodeConstruction ?surfaceSite where {graph ?g {"
+			 
+	          + "?Site <http://www.w3.org/ontologies/patriArchi/SappelerEP> ?AppellationEP."          
+	          + "?Site <http://www.w3.org/ontologies/patriArchi/idEltPatri> ?idEltPatri." 
+	          + "?Site <http://www.w3.org/ontologies/patriArchi/descEltPatri> ?descEltPatri." 
+	          + "?Site <http://www.w3.org/ontologies/patriArchi/altitude> ?altitude." 
+	          + "?Site <http://www.w3.org/ontologies/patriArchi/latitude> ?latitude." 
+	          + "?Site <http://www.w3.org/ontologies/patriArchi/longitude> ?longitude." 
+	          + "?Site <http://www.w3.org/ontologies/patriArchi/dateConstruction> ?dateConstruction."
+	          + "?Site <http://www.w3.org/ontologies/patriArchi/périodeConstruction> ?périodeConstruction."
+	          + "?Site <http://www.w3.org/ontologies/patriArchi/surfaceSite> ?surfaceSite."
+	          + "?AppellationEP <http://www.w3.org/ontologies/patriArchi/appelEP> \""+appel+"\" ."
+	         + "}}";
+
+			   try(QueryExecution qExec = QueryExecutionFactory.create(qs1, dataset)) {
+			   ResultSet rs = qExec.execSelect() ;
+			 //  ResultSetFormatter.out(rs) ;
+			   QuerySolution soln;
+			   RDFNode node;
+			   Site site;
+			   List<Site> sites = new ArrayList<Site>();
+			   List<String> appels;
+			   List<String> images;
+			   while(rs.hasNext()){
+				    soln = rs.nextSolution() ;
+				    node = soln.get("idEltPatri") ;int idEltPatri = (int)node.asNode().getLiteralValue();
+				    appels = rechAppelEP(dataset,idEltPatri);
+				    images =rechImagesEP(dataset, idEltPatri);
+				    node = soln.get("descEltPatri"); String descEltPatri = node.toString();
+				    node = soln.get("altitude"); String altitude = node.toString();
+				    node = soln.get("latitude"); String latitude = node.toString();
+				    node = soln.get("longitude"); String longitude = node.toString();
+				    node = soln.get("dateConstruction"); String dateConstruction = node.toString();
+				    node = soln.get("périodeConstruction"); String périodeConstruction = node.toString();
+				    node = soln.get("surfaceSite"); String surfaceSite = node.toString();
+				    site= new Site(idEltPatri,descEltPatri,altitude,latitude,longitude,
+				    		dateConstruction,périodeConstruction, surfaceSite, appels,images);
+
 				    sites.add(site);
 				    }
 		
@@ -317,6 +644,111 @@ public class Recherches {
 			 } 
 			 finally { dataset.end() ; }
 		 }
+		 
+
+			/******************************Lister tous les monuments*************************************/
+
+			 public List<Monument> listeMonument (Dataset dataset)
+			 {
+				 dataset.begin(ReadWrite.READ) ;
+				 try
+				
+				 {
+					  String qs1 = "Select ?idEltPatri  ?descEltPatri ?altitude ?latitude"
+					  		+ "?longitude ?dateConstruction  ?périodeConstruction where {graph ?g {"
+			          + "?Monument <http://www.w3.org/ontologies/patriArchi/idEltPatri> ?idEltPatri." 
+			          + "?Monument <http://www.w3.org/ontologies/patriArchi/descEltPatri> ?descEltPatri." 
+			          + "?Monument <http://www.w3.org/ontologies/patriArchi/altitude> ?altitude." 
+			          + "?Monument <http://www.w3.org/ontologies/patriArchi/latitude> ?latitude." 
+			          + "?Monument <http://www.w3.org/ontologies/patriArchi/longitude> ?longitude." 
+			          + "?Monument <http://www.w3.org/ontologies/patriArchi/dateConstruction> ?dateConstruction."
+			          + "?Monument <http://www.w3.org/ontologies/patriArchi/périodeConstruction> ?périodeConstruction."
+			         + "}}";
+
+					   try(QueryExecution qExec = QueryExecutionFactory.create(qs1, dataset)) {
+					   ResultSet rs = qExec.execSelect() ;
+					   QuerySolution soln;
+					   RDFNode node;
+					   Monument mon;
+					   List<String> appels;
+					   List<String> images;
+					   List<Monument> mons = new ArrayList<Monument>();
+					   
+					   while(rs.hasNext()){
+						    soln = rs.nextSolution() ;
+						    node = soln.get("idEltPatri") ;int idEltPatri = (int)node.asNode().getLiteralValue();
+						    appels = rechAppelEP(dataset,idEltPatri);
+						    images = rechImagesEP(dataset, idEltPatri);
+						    node = soln.get("descEltPatri"); String descEltPatri = node.toString();
+						    node = soln.get("altitude"); String altitude = node.toString();
+						    node = soln.get("latitude"); String latitude = node.toString();
+						    node = soln.get("longitude"); String longitude = node.toString();
+						    node = soln.get("dateConstruction"); String dateConstruction = node.toString();
+						    node = soln.get("périodeConstruction"); String périodeConstruction = node.toString();
+						    mon= new Monument(idEltPatri,descEltPatri,altitude,latitude,longitude,
+						    		dateConstruction,périodeConstruction,appels,images );			  
+						    mons.add(mon);
+						    }
+					   return mons;
+					 }
+				 } 
+				 finally { dataset.end() ; }
+			 }
+		 
+	 /*****************************Recherche Monument Par Appellation*******************************/
+		 
+		 public List<Monument> rechMonumentParAppel(Dataset dataset,String appel)
+		 {
+			 dataset.begin(ReadWrite.READ) ;
+			 try
+			
+			 {
+				  String qs1 = "Select ?idEltPatri  ?descEltPatri ?altitude ?latitude"
+				  		+ "?longitude ?dateConstruction  ?périodeConstruction where {graph ?g {"
+				 
+		          + "?Monument<http://www.w3.org/ontologies/patriArchi/SappelerEP> ?AppellationEP."          
+		          + "?Monument <http://www.w3.org/ontologies/patriArchi/idEltPatri> ?idEltPatri." 
+		          + "?Monument <http://www.w3.org/ontologies/patriArchi/descEltPatri> ?descEltPatri." 
+		          + "?Monument <http://www.w3.org/ontologies/patriArchi/altitude> ?altitude." 
+		          + "?Monument <http://www.w3.org/ontologies/patriArchi/latitude> ?latitude." 
+		          + "?Monument <http://www.w3.org/ontologies/patriArchi/longitude> ?longitude." 
+		          + "?Monument <http://www.w3.org/ontologies/patriArchi/dateConstruction> ?dateConstruction."
+		          + "?Monument <http://www.w3.org/ontologies/patriArchi/périodeConstruction> ?périodeConstruction."
+		          + "?AppellationEP <http://www.w3.org/ontologies/patriArchi/appelEP> \""+appel+"\" ."
+		         + "}}";
+
+				   try(QueryExecution qExec = QueryExecutionFactory.create(qs1, dataset)) {
+				   ResultSet rs = qExec.execSelect() ;
+				 //  ResultSetFormatter.out(rs) ;
+				   QuerySolution soln;
+				   RDFNode node;
+				   Monument mon;
+				   List<String> appels;
+				   List<String> images;
+				   List<Monument> mons = new ArrayList<Monument>();
+				   
+				   while(rs.hasNext()){
+					    soln = rs.nextSolution() ;
+					    node = soln.get("idEltPatri") ;int idEltPatri = (int)node.asNode().getLiteralValue();
+					    appels = rechAppelEP(dataset,idEltPatri);
+					    images = rechImagesEP(dataset, idEltPatri);
+					    node = soln.get("descEltPatri"); String descEltPatri = node.toString();
+					    node = soln.get("altitude"); String altitude = node.toString();
+					    node = soln.get("latitude"); String latitude = node.toString();
+					    node = soln.get("longitude"); String longitude = node.toString();
+					    node = soln.get("dateConstruction"); String dateConstruction = node.toString();
+					    node = soln.get("périodeConstruction"); String périodeConstruction = node.toString();
+					    mon= new Monument(idEltPatri,descEltPatri,altitude,latitude,longitude,
+					    		dateConstruction,périodeConstruction,appels,images );
+					  
+					    mons.add(mon);
+					    }
+			
+				   return mons;
+				 }
+			 } 
+			 finally { dataset.end() ; }
+		 }
 		 	/*********************MOT_CLE*********************************/
 		 
 		 public List<String> listeNomsRegions(Dataset dataset)
@@ -341,21 +773,72 @@ public class Recherches {
 						 }		
 						return nomsRegs;
 					 }
-				 } 
-				 finally { dataset.end() ; }
-			}
+				 }  finally { dataset.end() ; }}
 		 
-	/*	 public List<EltPatri> rechParMotCle(Dataset dataset, String motCle)
+		 
+		 public List<String> listeNomsAppels(Dataset dataset)
+			{
+
+			   dataset.begin(ReadWrite.READ) ;
+				 try
+				
+				 {
+					   String qs1 = "Select  ?appelEP  where {graph ?g {"
+					 + "?AppellationEP <http://www.w3.org/ontologies/patriArchi/appelEP> ?appelEP.}}";
+
+					   try(QueryExecution qExec = QueryExecutionFactory.create(qs1, dataset)) {
+					   ResultSet rs = qExec.execSelect() ;
+						List<String> appels = new ArrayList<String>();
+						QuerySolution soln;
+						RDFNode node;
+					   while (rs.hasNext()){
+						    soln = rs.nextSolution() ;	    
+						    node = soln.get("appelEP") ; String appel = node.toString();
+						    appels.add(appel);
+						 }		
+						return appels;
+					 }
+				 }  finally { dataset.end() ; }}
+		 
+	
+		 /******************************Recherche par mot clé*******************************/
+		 
+		 public List<EltPatri> rechParMotCle(Dataset dataset, String motCle)
 		 {  
 			 List<EltPatri> elts = new ArrayList<EltPatri>();
 			 List<String> regs= listeNomsRegions(dataset);
 			 Iterator<String> iter = regs.iterator();
-			 
-			 while (iter.hasNext()) {
-			      MonType value = iter.next();
-			      System.out.println( value );
+			 String reg="";
+			 while (iter.hasNext() && !reg.equals(motCle)) 
+				 {reg =iter.next();
+				 System.out.println(reg); }
+				 
+			 if( reg.equals(motCle)) 
+			 {      elts.addAll(rechMonumentParRegion(dataset,reg));
+				    elts.addAll(rechMaisonParRegion(dataset, reg));
+				    elts.addAll( rechSiteParRegion(dataset, reg));
+				    elts.addAll(rechEspaceParRegion(dataset, reg));} 
+			 else
+			 {
+				 List<String> appels= listeNomsAppels(dataset);
+				  iter = appels.iterator();
+				 String appel="";
+				 while (iter.hasNext() && !appel.equals(motCle)) 
+					 {appel =iter.next();
+					 System.out.println(appel); }
+				 if( appel.equals(motCle)) 
+				 {      elts.addAll(rechMonumentParAppel(dataset,appel));
+					     elts.addAll(rechMaisonParAppel(dataset, appel));
+					    elts.addAll( rechSiteParAppel(dataset, appel));
+					    elts.addAll(rechEspaceParAppel(dataset, appel));
+			     } 
+				 else
+				 {
+					 
+					 
+				 }
 			 }
+	    	 
 			 return elts;
-			 
-		 }*/
+             }
 }
