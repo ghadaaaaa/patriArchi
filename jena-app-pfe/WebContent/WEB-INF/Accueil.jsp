@@ -21,7 +21,12 @@
 
   <!-- Custom styles for this template -->
   <link href="css/business-casual.min.css" rel="stylesheet">
-
+<link rel="stylesheet" href="<%= request.getContextPath() %>/leaflet/leaflet.css" />
+<script src="<%= request.getContextPath() %>/leaflet/leaflet.js"></script>
+   <style> 
+   #mapid { height: 600px; 
+            weight: 100px;}
+   </style>
 </head>
 
 <body>
@@ -123,17 +128,45 @@
   
             <div class="bg-faded rounded">
             
-                  <img src="img/carte.png" usemap="#image-map">
-
-                      <map name="image-map">
-   		             
-   		                 <area target="_self" alt="Alger" title="Alger" href="Region?nom_reg=Alger" coords="384,60,391,56,397,55,403,57,398,63,390,64" shape="poly">
-                       <area target="_self" alt="Oran" title="Oran" href="Region?nom_reg=Oran" coords="263,101,272,92,283,92,291,90,279,105" shape="poly">
-   					   <area  target="_self" alt="Tlemcen" title="Tlemcen" href="Region?nom_reg=Tlemcen" coords="230,114,251,109,259,113,265,121,265,130,265,138,261,145,248,149,245,140,243,132,241,125,235,121" shape="poly">
-		
-					  </map>
-         
-     
+			    <div id="mapid" style="width:1100px; height:1000px" ></div>
+			    <script type="text/javascript">
+			    var mymap = L.map('mapid').setView([28.768,2.5],5.6);
+			    
+			    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png',{
+			
+			        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>',
+			        maxZoom: 10,
+			        id: 'mapbox/streets-v11',
+			        tileSize: 512,
+			        zoomOffset: -1,
+			        accessToken: 'your.mapbox.access.token'
+			    }).addTo(mymap);
+			    </script>
+			    <c:forEach var="reg" items="${regs}">
+			    <script>
+			   //var markers;
+				var nom = "<c:out value='${reg.nomRegion}'/>";
+			    var altiR = "<c:out value='${reg.altitudeR}'/>";
+			    var longiR = "<c:out value='${reg.longitudeR}'/>";	    
+			    var marker= L.marker([altiR,longiR]).addTo(mymap);
+			    marker.bindPopup(nom);
+			 //  markers.push(marker);	    
+			    marker.on('click', allerARegion);
+			    function allerARegion(e) {
+				window.location.href="Region?nom_reg="+marker.getPopup().getContent() ;
+			   }
+			    </script>
+			      </c:forEach>
+			  
+			      <script>
+			     // for (var i in markers)
+			     // { markers[i].on('click', allerARegion); } 
+				 //   function allerARegion(e) {
+				//	window.location.href="Region?nom_reg="+markers[i].getPopup().getContent() ; }
+				  </script>
+			 
+			   
+			
        </div>
          </div>
         </div>

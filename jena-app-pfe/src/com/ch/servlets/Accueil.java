@@ -13,6 +13,7 @@ import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyStorageException;
 
 import com.ch.controller.RechRegion;
+import com.ch.model.Monument;
 import com.ch.model.Region;
 import com.ch.ontology.Ontology;
 
@@ -50,8 +51,9 @@ public class Accueil extends HttpServlet {
 			e.printStackTrace();
 		}
 		ont.loadTtlFileInTDB();
-
-		
+		RechRegion rechr= new RechRegion();
+		List<Region> regs = rechr.ListeRegionsMap(ont.getDataset());
+		request.setAttribute("regs", regs);
 		this.getServletContext().getRequestDispatcher(VUE).forward( request, response );
 	}
 
