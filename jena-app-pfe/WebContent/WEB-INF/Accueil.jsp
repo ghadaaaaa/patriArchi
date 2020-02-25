@@ -141,22 +141,40 @@
 			        zoomOffset: -1,
 			        accessToken: 'your.mapbox.access.token'
 			    }).addTo(mymap);
+			    var noms=[];
+			    var longitudes=[];
+			    var altitudes=[];
+			    var i=0;
 			    </script>
-			    <c:forEach var="reg" items="${regs}">
+			  
+	
+			<c:forEach var="reg" items="${regs}">
+			<script>
+			noms[i] = "<c:out value='${reg.nomRegion}'/>";
+		    altitudes[i] = "<c:out value='${reg.altitudeR}'/>";
+		    longitudes[i] = "<c:out value='${reg.longitudeR}'/>";
+			i++;
+			</script>
+			</c:forEach>
 			    <script>
-			   //var markers;
-				var nom = "<c:out value='${reg.nomRegion}'/>";
-			    var altiR = "<c:out value='${reg.altitudeR}'/>";
-			    var longiR = "<c:out value='${reg.longitudeR}'/>";	    
-			    var marker= L.marker([altiR,longiR]).addTo(mymap);
-			    marker.bindPopup(nom);
-			 //  markers.push(marker);	    
-			    marker.on('click', allerARegion);
-			    function allerARegion(e) {
-				window.location.href="Region?nom_reg="+marker.getPopup().getContent() ;
+			   var markers = [];
+				
+			   for (var z=0; z<noms.length; z++) {    
+			    var marker= new L.marker([altitudes[z],longitudes[z]]).addTo(mymap);
+			    marker.bindPopup(noms[z]);
+			    markers.push(marker);
 			   }
+			  // markers[0].on('click', alleraregion);
+			  
+			 for ( y=0; y < markers.length; y++) {
+				  let new_y = y;
+				  markers[y].on('click', function()
+				 { console.log("here", markers[new_y]._popup._content);
+			       window.location.href="Region?nom_reg="+markers[new_y]._popup._content;
+			     }
+			 )};
 			    </script>
-			      </c:forEach>
+			      
 			  
 			      <script>
 			     // for (var i in markers)
