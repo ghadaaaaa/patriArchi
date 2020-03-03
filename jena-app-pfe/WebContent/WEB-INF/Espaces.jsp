@@ -44,7 +44,7 @@
         
           </h2>
            <c:if test = "${!esp.images.isEmpty()}">
-            <img class=" rounded" src="${mai.images[0]}" alt="">
+            <img class=" rounded" src="${esp.images[0]}" alt="">
             </c:if>
             <c:if test = "${esp.images.isEmpty()}">
             </c:if>

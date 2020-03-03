@@ -6,22 +6,20 @@ public class EltPatri
 {
 	private int idEltPatri;
 	private String descEltPatri;
-	private String altitude;
-	private String latitude;
-	private String longitude;
+	private float altitude;
+	private float longitude;
 	private String dateConstruction;
 	private String périodeConstruction;
 	private List<String> appels;
 	private List<String> images;
 	
-	public EltPatri(int idEltPatri,String descEltPatri,String altitude,String latitude,
-			String longitude, String dateConstruction,String périodeConstruction, List<String> appels, 
+	public EltPatri(int idEltPatri,String descEltPatri,float altitude,
+			float longitude, String dateConstruction,String périodeConstruction, List<String> appels, 
 			List<String> images)
 	{
 		this.idEltPatri=idEltPatri;
 		this.descEltPatri= descEltPatri;
 		this.altitude = altitude;
-		this.latitude = latitude;
 		this.longitude = longitude;
 		this.dateConstruction = dateConstruction;
 		this.périodeConstruction = périodeConstruction;
@@ -66,27 +64,19 @@ public class EltPatri
 		this.descEltPatri = descEltPatri;
 	}
 
-	public String getAltitude() {
+	public float getAltitude() {
 		return altitude;
 	}
 
-	public void setAltitude(String altitude) {
+	public void setAltitude(float altitude) {
 		this.altitude = altitude;
 	}
 
-	public String getLatitude() {
-		return latitude;
-	}
-
-	public void setLatitude(String latitude) {
-		this.latitude = latitude;
-	}
-
-	public String getLongitude() {
+	public float getLongitude() {
 		return longitude;
 	}
 
-	public void setLongitude(String longitude) {
+	public void setLongitude(float longitude) {
 		this.longitude = longitude;
 	}
 

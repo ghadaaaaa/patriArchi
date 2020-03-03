@@ -48,8 +48,8 @@
             </c:if>
             <c:if test = "${mai.images.isEmpty()}">
             </c:if>
-          <div class="intro-button mx-auto">
-            <a class="btn btn-primary btn-xl" href="Maison">Voir Plus</a>
+          <div class="intro-button mx-auto" >
+            <a class="btn btn-primary btn-xl" href="Maison?idMaison=${mai.idEltPatri}">Voir Plus</a>
           </div>
            <br>
         </div>

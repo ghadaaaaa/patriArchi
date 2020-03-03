@@ -67,7 +67,7 @@
             <span class="section-heading-upper">Les maisons<br> traditionnelles</span>
         
           </h2>
-            <img class=" rounded" src="img/Timgad.jpeg" alt="">
+            <img class=" rounded" src="img/Hassan_Bacha.jpg" alt="">
           <div class="intro-button mx-auto">
             <a class="btn btn-primary btn-xl" href="Maisons">Voir Plus</a>
           </div>
@@ -81,7 +81,7 @@
             <span class="section-heading-upper"><br> Les espaces</span>
         
           </h2>
-            <img class=" rounded" src="img/Timgad.jpeg" alt="">
+            <img class=" rounded" src="img/Casbah.jpg" alt="">
           <div class="intro-button mx-auto">
             <a class="btn btn-primary btn-xl" href="Espaces">Voir Plus</a>
           </div>
@@ -148,11 +148,11 @@
 			    </script>
 			  
 	
-			<c:forEach var="reg" items="${regs}">
+			<c:forEach var="elt" items="${elts}">
 			<script>
-			noms[i] = "<c:out value='${reg.nomRegion}'/>";
-		    altitudes[i] = "<c:out value='${reg.altitudeR}'/>";
-		    longitudes[i] = "<c:out value='${reg.longitudeR}'/>";
+			noms[i] = "<c:out value='${elt.appels[0]}'/>";
+		    altitudes[i] = "<c:out value='${elt.altitude}'/>";
+		    longitudes[i] = "<c:out value='${elt.longitude}'/>";
 			i++;
 			</script>
 			</c:forEach>
@@ -170,18 +170,13 @@
 				  let new_y = y;
 				  markers[y].on('click', function()
 				 { console.log("here", markers[new_y]._popup._content);
-			       window.location.href="Region?nom_reg="+markers[new_y]._popup._content;
+			      // window.location.href="Region?nom_reg="+markers[new_y]._popup._content;
 			     }
 			 )};
 			    </script>
 			      
 			  
-			      <script>
-			     // for (var i in markers)
-			     // { markers[i].on('click', allerARegion); } 
-				 //   function allerARegion(e) {
-				//	window.location.href="Region?nom_reg="+markers[i].getPopup().getContent() ; }
-				  </script>
+			   
 			 
 			   
 			

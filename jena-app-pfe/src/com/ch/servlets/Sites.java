@@ -52,7 +52,7 @@ public class Sites extends HttpServlet {
 		}
 		ont.loadTtlFileInTDB();
 		   Recherches rech = new Recherches();
-		   List<Maison> sites = rech.listeMaison(ont.getDataset());
+		   List<com.ch.model.Site> sites = rech.listeSite(ont.getDataset());
 		   request.setAttribute("sites", sites);
 		this.getServletContext().getRequestDispatcher(VUE).forward( request, response );
 	}

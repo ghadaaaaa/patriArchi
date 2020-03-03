@@ -4,8 +4,39 @@
   <artifactId>jena-app-pfe</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
-  
+  <repositories>
+	<repository>
+	    <id>jitpack.io</id>
+	    <url>https://jitpack.io</url>
+	</repository>
+</repositories>
+ 
   <dependencies>
+  
+					<dependency>
+					    <groupId>com.github.linguatools</groupId>
+					    <artifactId>disco</artifactId>
+					    <version>v3.0.0</version>
+					</dependency>
+					 <dependency>
+					    <groupId>junit</groupId>
+					    <artifactId>junit</artifactId>
+					    <version>4.0</version>
+					    <scope>compile</scope>
+					  </dependency>
+					  <dependency>
+					    <groupId>org.xerial</groupId>
+					    <artifactId>sqlite-jdbc</artifactId>
+					    <version>3.7.2</version>
+					  </dependency>
+					 
+				<!-- https://mvnrepository.com/artifact/org.python/jython-slim -->
+				<dependency>
+				    <groupId>org.python</groupId>
+				    <artifactId>jython-slim</artifactId>
+				    <version>2.7.2b3</version>
+				</dependency>
+				
 			        <dependency>
 			            <groupId>javax.servlet</groupId>
 			            <artifactId>javax.servlet-api</artifactId>

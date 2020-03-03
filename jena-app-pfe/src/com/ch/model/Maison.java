@@ -8,12 +8,12 @@ public class Maison  extends EltPatri
 	private String surfaceSol;
 	private String surfaceMaison;
 
-	public Maison(int idEltPatri,String descEltPatri,String altitude,String latitude,
-			String longitude, String dateConstruction,String périodeConstruction, 
+	public Maison(int idEltPatri,String descEltPatri,float altitude,
+			float longitude, String dateConstruction,String périodeConstruction, 
 			String surfaceSol, String surfaceMaison,List<String> appels, 
 			List<String> images)
 	{
-		super(idEltPatri,descEltPatri,altitude,latitude,longitude,
+		super(idEltPatri,descEltPatri,altitude,longitude,
 				dateConstruction,périodeConstruction,  appels,  images);
 		
 		this.surfaceSol= surfaceSol;

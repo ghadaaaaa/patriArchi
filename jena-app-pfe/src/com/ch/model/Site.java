@@ -5,11 +5,11 @@ import java.util.List;
 public class Site extends EltPatri{
 	private String surfaceSite;
 	
-	public Site(int idEltPatri,String descEltPatri,String altitude,String latitude,
-			String longitude, String dateConstruction,String périodeConstruction, String surfaceSite, 
+	public Site(int idEltPatri,String descEltPatri,float altitude,
+			float longitude, String dateConstruction,String périodeConstruction, String surfaceSite, 
 			List<String> appels, List<String> images)
 	{
-		super(idEltPatri,descEltPatri,altitude,latitude,longitude,
+		super(idEltPatri,descEltPatri,altitude,longitude,
 				dateConstruction,périodeConstruction,appels,images);
 		this.surfaceSite= surfaceSite;
 	
