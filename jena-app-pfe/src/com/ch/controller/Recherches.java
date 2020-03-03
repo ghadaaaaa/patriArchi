@@ -423,7 +423,7 @@ public List<EltPatri> ListeEltsPatriMap(Dataset dataset)
 		 { String qs1 = "Select ?idEltPatri ?descEltPatri ?altitude "
 			  		+ "?longitude ?dateConstruction  ?périodeConstruction ?surfaceSol ?surfaceMaison "
 			  		+ "where {graph ?g {"
-	          + "?Maison <http://www.w3.org/ontologies/patriArchi/Sappeler> ?AppellationEP."          
+	          + "?Maison <http://www.w3.org/ontologies/patriArchi/SappelerEP> ?AppellationEP."          
 	          + "?Maison <http://www.w3.org/ontologies/patriArchi/idEltPatri> ?idEltPatri." 
 	          + "?Maison <http://www.w3.org/ontologies/patriArchi/descEltPatri> ?descEltPatri." 
 	          + "?Maison <http://www.w3.org/ontologies/patriArchi/altitude> ?altitude." 
