@@ -54,10 +54,11 @@ public class Accueil extends HttpServlet {
 		}
 		ont.loadTtlFileInTDB();
 		Recherches rech= new Recherches();
-		List<com.ch.model.Maison> mais = rech.listeMaison(ont.getDataset());
+		List<com.ch.model.Maison> mais = rech.listeMaison(ont.getDataset());	
 		List<com.ch.model.Site> sites = rech.listeSite(ont.getDataset());
 		List<com.ch.model.Monument> mons = rech.listeMonument(ont.getDataset());
 		List<com.ch.model.Espace> esps = rech.listeEspace(ont.getDataset());
+	
 		request.setAttribute("mais", mais);
 		request.setAttribute("sites", sites);
 		request.setAttribute("mons", mons);

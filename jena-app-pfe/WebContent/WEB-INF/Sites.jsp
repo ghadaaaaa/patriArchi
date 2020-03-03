@@ -84,7 +84,7 @@
             <c:if test = "${site.images.isEmpty()}">
             </c:if>
           <div class="intro-button mx-auto">
-            <a class="btn btn-primary btn-xl" href="Site">Voir Plus</a>
+            <a class="btn btn-primary btn-xl" href="Site?idSite=${site.idEltPatri}">Voir Plus</a>
           </div>
            <br>
         </div>

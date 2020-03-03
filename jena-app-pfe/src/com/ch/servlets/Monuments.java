@@ -50,6 +50,7 @@ public class Monuments extends HttpServlet {
 		ont.loadTtlFileInTDB();
 		   Recherches rech = new Recherches();
 		   List<Monument> mons = rech.listeMonument(ont.getDataset());
+		
 		   request.setAttribute("mons", mons);
 		  this.getServletContext().getRequestDispatcher(VUE).forward( request, response );
 	}

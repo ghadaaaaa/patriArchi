@@ -49,7 +49,7 @@
             <c:if test = "${esp.images.isEmpty()}">
             </c:if>
           <div class="intro-button mx-auto">
-            <a class="btn btn-primary btn-xl" href="Espace">Voir Plus</a>
+            <a class="btn btn-primary btn-xl" href="Espace?idEsp=${esp.idEltPatri}">Voir Plus</a>
           </div>
            <br>
         </div>

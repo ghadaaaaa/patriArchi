@@ -84,17 +84,12 @@
             <c:if test = "${mon.images.isEmpty()}">
             </c:if>
           <div class="intro-button mx-auto">
-            <a class="btn btn-primary btn-xl" href="Monument">Voir Plus</a>
+            <a class="btn btn-primary btn-xl" href="Monument?idMonument=${mon.idEltPatri}">Voir Plus</a>
           </div>
            <br>
         </div>
      </c:forEach> 
 
-   
-     
-     
-   
-     
      
       
 </div>

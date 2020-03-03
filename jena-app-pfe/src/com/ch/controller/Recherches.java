@@ -25,6 +25,7 @@ import com.ch.model.Site;
 
 public class Recherches {
 	
+	private static final float Min_SYN_SIM = (float) 0.8;
 	public Recherches () {}
 	
 	
@@ -915,36 +916,192 @@ public List<EltPatri> ListeEltsPatriMap(Dataset dataset)
 			 List<String> regs= listeNomsRegions(dataset);
 			 Iterator<String> iter = regs.iterator();
 			 String reg="";
-			 while (iter.hasNext() && syntaxicSimilarity(reg, motCle)<0.8) 
-				 {reg =iter.next();
-				 System.out.println(reg); }
+			 while (iter.hasNext() ) 
+				 {
+				 if(syntaxicSimilarity(reg, motCle)>=Min_SYN_SIM) 
+				     {  elts.addAll(rechMonumentParRegion(dataset,reg));
+					    elts.addAll(rechMaisonParRegion(dataset, reg));
+					    elts.addAll( rechSiteParRegion(dataset, reg));
+					    elts.addAll(rechEspaceParRegion(dataset, reg));} 
+				 
+				 reg =iter.next();
+				 }
 			
-			 if(syntaxicSimilarity(reg, motCle)>=0.8) 
-			 {      elts.addAll(rechMonumentParRegion(dataset,reg));
-				    elts.addAll(rechMaisonParRegion(dataset, reg));
-				    elts.addAll( rechSiteParRegion(dataset, reg));
-				    elts.addAll(rechEspaceParRegion(dataset, reg));} 
-			 else
-			 {
+			
+			
 				 List<String> appels= listeNomsAppels(dataset);
 				  iter = appels.iterator();
 				 String appel="";
-				 while (iter.hasNext() && syntaxicSimilarity(appel, motCle)<0.8) 
-					 {appel =iter.next();
-					 System.out.println(appel); }
-				 if(syntaxicSimilarity(appel, motCle)>=0.8) 
-				 {      elts.addAll(rechMonumentParAppel(dataset,appel));
-					     elts.addAll(rechMaisonParAppel(dataset, appel));
-					    elts.addAll( rechSiteParAppel(dataset, appel));
-					    elts.addAll(rechEspaceParAppel(dataset, appel));
-			     } 
-				 else
-				 {
-					 
-					 
-				 }
-			 }
+				 while (iter.hasNext()) 
+					 {
+					 if(syntaxicSimilarity(appel, motCle)>=Min_SYN_SIM) 
+					 {      elts.addAll(rechMonumentParAppel(dataset,appel));
+						     elts.addAll(rechMaisonParAppel(dataset, appel));
+						    elts.addAll( rechSiteParAppel(dataset, appel));
+						    elts.addAll(rechEspaceParAppel(dataset, appel));
+				     } 
+					 appel =iter.next();
+					 }
+	
+			 
 	    	 
 			 return elts;
              }
+		 
+		 
+		 public Monument rechMonumentParId(Dataset dataset, int idMonument) {
+				// TODO Auto-generated method stub
+				dataset.begin(ReadWrite.READ) ;
+				 try
+				
+				 {
+					  String qs1 = "Select ?descEltPatri ?altitude"
+					  		+ "?longitude ?dateConstruction ?périodeConstruction ?typeMo "
+					  		+ "where {graph ?g {"
+					  		
+				      + "?Monument <http://www.w3.org/ontologies/patriArchi/idEltPatri> "+idMonument+"."
+			          + "?Monument <http://www.w3.org/ontologies/patriArchi/descEltPatri> ?descEltPatri." 
+			          + "?Monument <http://www.w3.org/ontologies/patriArchi/altitude> ?altitude." 
+			          + "?Monument <http://www.w3.org/ontologies/patriArchi/longitude> ?longitude."
+			          + "?Monument <http://www.w3.org/ontologies/patriArchi/typeMo> ?typeMo."
+			          + "?Monument <http://www.w3.org/ontologies/patriArchi/dateConstruction> ?dateConstruction."
+			          + "?Monument <http://www.w3.org/ontologies/patriArchi/périodeConstruction> ?périodeConstruction."
+			         
+			         + "}}";
+
+					   try(QueryExecution qExec = QueryExecutionFactory.create(qs1, dataset)) {
+					   ResultSet rs = qExec.execSelect() ;
+					 //  ResultSetFormatter.out(rs) ;
+					   QuerySolution soln;
+					   RDFNode node;
+					   Monument mon = null;
+					
+					   List<String> appels;
+					   List<String> images;
+					   if(rs.hasNext()){
+						    soln = rs.nextSolution() ;
+						    appels = rechAppelEP(dataset,idMonument);
+						    images =rechImagesEP(dataset, idMonument);
+						    node = soln.get("descEltPatri"); String descEltPatri = node.toString();
+						    node = soln.get("altitude") ; float altitude = Float.parseFloat(node.toString()) ;
+						    node = soln.get("longitude") ;float longitude = Float.parseFloat(node.toString()) ;
+						    node = soln.get("dateConstruction"); String dateConstruction = node.toString();
+						    node = soln.get("périodeConstruction"); String périodeConstruction = node.toString();
+						    node = soln.get("typeMo"); String typeMo = node.toString();
+						    mon= new Monument(idMonument,descEltPatri,altitude,longitude,
+						    		dateConstruction,périodeConstruction, typeMo, appels,images );
+						  /**********************************/
+						  
+							    
+						    /************************************/
+						    }
+					   return mon;
+					 }
+				 } 
+				 finally { dataset.end() ; }
+			}
+
+
+			public Espace rechEspParId(Dataset dataset, int idEsp) {
+				// TODO Auto-generated method stub
+				dataset.begin(ReadWrite.READ) ;
+				 try
+				
+				 {
+					 String qs1="Select ?idEltPatri ?descEltPatri ?altitude"
+						  		+ "?longitude ?dateConstruction  ?périodeConstruction ?typeEspace where {graph ?g {"          
+				          + "?Espace  <http://www.w3.org/ontologies/patriArchi/idEltPatri> "+idEsp+"." 
+				          + "?Espace  <http://www.w3.org/ontologies/patriArchi/descEltPatri> ?descEltPatri." 
+				          + "?Espace  <http://www.w3.org/ontologies/patriArchi/altitude> ?altitude." 
+				          + "?Espace  <http://www.w3.org/ontologies/patriArchi/longitude> ?longitude." 
+				          + "?Espace <http://www.w3.org/ontologies/patriArchi/dateConstruction> ?dateConstruction."
+				          + "?Espace <http://www.w3.org/ontologies/patriArchi/périodeConstruction> ?périodeConstruction."
+				          + "?Espace  <http://www.w3.org/ontologies/patriArchi/typeEspace> ?typeEspace." 
+				          + "}}";
+					  
+				     
+
+					   try(QueryExecution qExec = QueryExecutionFactory.create(qs1, dataset)) {
+					   ResultSet rs = qExec.execSelect() ;
+					 //  ResultSetFormatter.out(rs) ;
+					   QuerySolution soln;
+					   RDFNode node;
+					   Espace esp = null;
+					
+					   List<String> appels;
+					   List<String> images;
+					   if(rs.hasNext()){
+						    soln = rs.nextSolution() ;
+						    appels = rechAppelEP(dataset,idEsp);
+						    images =rechImagesEP(dataset, idEsp);
+						    node = soln.get("descEltPatri"); String descEltPatri = node.toString();
+						    node = soln.get("altitude") ; float altitude = Float.parseFloat(node.toString()) ;
+						    node = soln.get("longitude") ;float longitude = Float.parseFloat(node.toString()) ;
+						    node = soln.get("dateConstruction"); String dateConstruction = node.toString();
+						    node = soln.get("périodeConstruction"); String périodeConstruction = node.toString();
+						    node = soln.get("typeEspace"); String typeEspace = node.toString();
+						    esp= new Espace(idEsp,descEltPatri,altitude,longitude,
+						    		dateConstruction,périodeConstruction, typeEspace, appels, images);
+						    
+						  /**********************************/
+						  
+							    
+						    /************************************/
+						    }
+					   return esp;
+					 }
+				 } 
+				 finally { dataset.end() ; }
+			}
+
+
+			public Site rechSiteParId(Dataset dataset, int idSite) {
+				// TODO Auto-generated method stub
+				dataset.begin(ReadWrite.READ) ;
+				 try
+				
+				 {
+					  String qs1 = "Select ?idEltPatri ?descEltPatri ?altitude ?latitude "
+					  		+ "?longitude ?dateConstruction  ?périodeConstruction ?surfaceSite where {graph ?g {"       
+			          + "?Site <http://www.w3.org/ontologies/patriArchi/idEltPatri> "+idSite+"." 
+			          + "?Site <http://www.w3.org/ontologies/patriArchi/descEltPatri> ?descEltPatri." 
+			          + "?Site <http://www.w3.org/ontologies/patriArchi/altitude> ?altitude." 
+			          + "?Site <http://www.w3.org/ontologies/patriArchi/longitude> ?longitude." 
+			          + "?Site <http://www.w3.org/ontologies/patriArchi/dateConstruction> ?dateConstruction."
+			          + "?Site <http://www.w3.org/ontologies/patriArchi/périodeConstruction> ?périodeConstruction."
+			          + "?Site <http://www.w3.org/ontologies/patriArchi/surfaceSite> ?surfaceSite."
+			         + "}}";
+
+					   try(QueryExecution qExec = QueryExecutionFactory.create(qs1, dataset)) {
+					   ResultSet rs = qExec.execSelect() ;
+					 //  ResultSetFormatter.out(rs) ;
+					   QuerySolution soln;
+					   RDFNode node;
+					   Site site=null;
+					  
+					   List<String> appels;
+					   List<String> images;
+					
+					   if(rs.hasNext()){
+						    soln = rs.nextSolution() ;
+						   
+						    appels = rechAppelEP(dataset,idSite);
+						    images =rechImagesEP(dataset, idSite);
+						    node = soln.get("descEltPatri"); String descEltPatri = node.toString();
+						    node = soln.get("altitude") ; float altitude = Float.parseFloat(node.toString()) ;
+						    node = soln.get("longitude") ;float longitude = Float.parseFloat(node.toString()) ;
+						    node = soln.get("dateConstruction"); String dateConstruction = node.toString();
+						    node = soln.get("périodeConstruction"); String périodeConstruction = node.toString();
+						    node = soln.get("surfaceSite"); String surfaceSite = node.toString();
+						    site= new Site(idSite,descEltPatri,altitude,longitude,
+						    		dateConstruction,périodeConstruction, surfaceSite, appels,images);
+						  
+						   
+						    }
+				
+					   return site;
+					 }
+				 } 
+				 finally { dataset.end() ; }
+			 }
 }

@@ -135,16 +135,16 @@
 			    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png',{
 			
 			        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>',
-			        maxZoom: 10,
+			        maxZoom: 20,
 			        id: 'mapbox/streets-v11',
 			        tileSize: 512,
 			        zoomOffset: -1,
 			        accessToken: 'your.mapbox.access.token'
 			    }).addTo(mymap);
-			    var nomsMa=[];
-			    var longitudesMa=[];
-			    var altitudesMa=[];
-			    var i=0;
+			    var nomsMa=[]; var nomsMo=[]; var nomsSites=[]; var nomsEsp=[];
+			    var longitudesMa=[]; var longitudesMo=[]; var longitudesSites=[]; var longitudesEsp=[];
+			    var altitudesMa=[]; var altitudesMo=[]; var altitudesSites=[]; var altitudesEsp=[];
+			    var i=0; var j=0; var k=0; var l=0;
 			    </script>
 			  
 	
@@ -157,16 +157,45 @@
 			</script>
 			</c:forEach>
 			
+			<c:forEach var="site" items="${sites}">
+			<script>
+			nomsSites[j] = "<c:out value='${site.appels[0]}'/>";
+		    altitudesSites[j] = "<c:out value='${site.altitude}'/>";
+		    longitudesSites[j] = "<c:out value='${site.longitude}'/>";
+			j++;
+			</script>
+			</c:forEach>
+			
+			<c:forEach var="mon" items="${mons}">
+			<script>
+			nomsMo[k] = "<c:out value='${mon.appels[0]}'/>";
+		    altitudesMo[k] = "<c:out value='${mon.altitude}'/>";
+		    longitudesMo[k] = "<c:out value='${mon.longitude}'/>";
+			k++;
+			</script>
+			</c:forEach>
+			
+			<c:forEach var="esp" items="${esps}">
+			<script>
+			nomsEsp[l] = "<c:out value='${esp.appels[0]}'/>";
+		    altitudesEsp[l] = "<c:out value='${esp.altitude}'/>";
+		    longitudesEsp[l] = "<c:out value='${esp.longitude}'/>";
+			l++;
+			</script>
+			</c:forEach>
+		
 			    <script>
-			   var markersMa = [];
-				
+			   var markersMa = []; 
+			   var  markersSites =[]; 
+			   var markersMo =[]; 
+			   var markersEsp =[];
+									/*********MAISONS**********/
 			   for (var z=0; z<nomsMa.length; z++) {    
 			    var marker= new L.marker([altitudesMa[z],longitudesMa[z]]).addTo(mymap);
-			    marker.bindPopup(nomsMa[z]);
+			    marker.bindPopup(nomsMa[z]).openPopup();
 			    markersMa.push(marker);
 			   }
 		
-			  
 			 for ( y=0; y < markersMa.length; y++) {
 				  let new_y = y;
 				  markersMa[y].on('click', function()
@@ -174,6 +203,53 @@
 			       window.location.href="MaisonMap?appelMa="+markersMa[new_y]._popup._content;
 			     }
 			 )};
+			                        /*********SITES**********/
+			                        
+			        for (var b=0; b<nomsSites.length; b++) {    
+				    var marker= new L.marker([altitudesSites[b],longitudesSites[b]]).addTo(mymap);
+				    marker.bindPopup(nomsSites[b]).openPopup();
+				    markersSites.push(marker);
+				   }
+			                        
+			        for ( c=0; c < markersSites.length; c++) {
+						  let new_c = c;
+						  markerSites[c].on('click', function()
+						 { console.log("here", markersSites[new_c]._popup._content);
+					     //window.location.href="MaisonMap?appelMa="+markersSites[new_c]._popup._content;
+					     }
+					 )};
+					 
+                     /*********Mouments**********/
+                     
+				        for (var d=0; d<nomsMo.length; d++) {    
+					    var marker= new L.marker([altitudesMo[d],longitudesMo[d]]).addTo(mymap);
+					    marker.bindPopup(nomsMo[d]).openPopup();
+					    markersMo.push(marker);
+					   }
+				                        
+				        for ( e=0; e < markersMo.length; e++) {
+							  let new_e = e;
+							  markersMo[e].on('click', function()
+							 { console.log("here", markersMo[new_e]._popup._content);
+						     //window.location.href="MaisonMap?appelMa="+markersSites[new_c]._popup._content;
+						     }
+						 )};
+				   /*********Espaces**********/
+				   
+				      for (var f=0; f<nomsEsp.length; f++) {    
+					    var marker= new L.marker([altitudesEsp[f],longitudesEsp[f]]).addTo(mymap);
+					    marker.bindPopup(nomsEsp[f]).openPopup();
+					    markersEsp.push(marker);
+					   }
+				                        
+				        for ( g=0; g < markersEsp.length; g++) {
+							  let new_g = g;
+							  markersEsp[g].on('click', function()
+							 { console.log("here", markersEsp[new_g]._popup._content);
+						     //window.location.href="MaisonMap?appelMa="+markersSites[new_c]._popup._content;
+						     }
+						 )};
+						 
 			    </script>
 			      
 			  
