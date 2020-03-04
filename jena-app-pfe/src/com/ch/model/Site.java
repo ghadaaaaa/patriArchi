@@ -14,4 +14,14 @@ public class Site extends EltPatri{
 		this.surfaceSite= surfaceSite;
 	
 	}
+
+	public String getSurfaceSite() {
+		return surfaceSite;
+	}
+
+	public void setSurfaceSite(String surfaceSite) {
+		this.surfaceSite = surfaceSite;
+	}
+	
+	
 }

@@ -16,17 +16,19 @@ import com.ch.controller.Recherches;
 import com.ch.ontology.Ontology;
 
 /**
- * Servlet implementation class MaisonMap
+ * Servlet implementation class EspaceMap
  */
-@WebServlet("/MaisonMap")
-public class MaisonMap extends HttpServlet {
+@WebServlet("/EspaceMap")
+public class EspaceMap extends HttpServlet {
+	public static final String VUE ="/WEB-INF/Espace.jsp";
 	private static final long serialVersionUID = 1L;
-	public static final String VUE ="/WEB-INF/Maison.jsp";
        
- 
-    public MaisonMap() {
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public EspaceMap() {
         super();
-        
+        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -47,18 +49,24 @@ public class MaisonMap extends HttpServlet {
 			e.printStackTrace();
 		}
 		ont.loadTtlFileInTDB();
-		String appelMaison = request.getParameter("appelMa");
+		
+		
 		  Recherches rech = new Recherches();
 		  String msg ="";
-		  List<com.ch.model.Maison> mais= rech.rechMaisonParAppel(ont.getDataset(), appelMaison);
+		  String appelEsp= request.getParameter("appelEsp");
+		  List<com.ch.model.Espace> esps= rech.rechEspaceParAppel(ont.getDataset(), appelEsp);
 		
-		  if (mais.isEmpty()|| mais.size()>1) 
-	        {System.out.println("ERROR OF SIZE ");
-			  msg= "Aucune maison"; }
+		  if (esps.isEmpty()) 
+	        {System.out.println("Vide");
+			  msg= "Aucun espace"; }
+		  else if (esps.size()>1)
+		  {System.out.println("Plusieurs espaces ont le mm nom ");
+		  msg= "Plusieurs espaces"; }
+		  
 		  else
 		  {
-			  com.ch.model.Maison mai = mais.get(0);
-		      request.setAttribute("mai", mai);
+			  com.ch.model.Espace esp = esps.get(0);
+		      request.setAttribute("esp", esp);
 		  }
 		  request.setAttribute("msg", msg);
 		this.getServletContext().getRequestDispatcher(VUE).forward( request, response );

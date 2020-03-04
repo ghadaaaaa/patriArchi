@@ -105,15 +105,15 @@
               </h2>
               <ul>
               <li>
-              Altitude:${mon.altitude}
+              Altitude: ${mon.altitude}
               </li>
              
               <li>
-              Longitude:${mon.longitude}
+              Longitude: ${mon.longitude}
               </li>
             <li>
-              Type :
-              </li>
+              Type du monument: ${mon.typeMo}
+              </li> 
             
               </ul>
               

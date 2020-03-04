@@ -16,17 +16,19 @@ import com.ch.controller.Recherches;
 import com.ch.ontology.Ontology;
 
 /**
- * Servlet implementation class MaisonMap
+ * Servlet implementation class MonumentMap
  */
-@WebServlet("/MaisonMap")
-public class MaisonMap extends HttpServlet {
+@WebServlet("/MonumentMap")
+public class MonumentMap extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	public static final String VUE ="/WEB-INF/Maison.jsp";
+	public static final String VUE ="/WEB-INF/Monument.jsp";
        
- 
-    public MaisonMap() {
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public MonumentMap() {
         super();
-        
+        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -47,18 +49,24 @@ public class MaisonMap extends HttpServlet {
 			e.printStackTrace();
 		}
 		ont.loadTtlFileInTDB();
-		String appelMaison = request.getParameter("appelMa");
+		
+		
 		  Recherches rech = new Recherches();
 		  String msg ="";
-		  List<com.ch.model.Maison> mais= rech.rechMaisonParAppel(ont.getDataset(), appelMaison);
+		  String appelMo=request.getParameter("appelMo");
+		  List<com.ch.model.Monument> mons= rech.rechMonumentParAppel(ont.getDataset(), appelMo);
 		
-		  if (mais.isEmpty()|| mais.size()>1) 
-	        {System.out.println("ERROR OF SIZE ");
-			  msg= "Aucune maison"; }
+		  if (mons.isEmpty()) 
+	        {System.out.println("Vide");
+			  msg= "Aucun mon"; }
+		  else if (mons.size()>1)
+		  {System.out.println("Plusieurs mons ont le mm nom ");
+		  msg= "Plusieurs mons"; }
+		  
 		  else
 		  {
-			  com.ch.model.Maison mai = mais.get(0);
-		      request.setAttribute("mai", mai);
+			  com.ch.model.Monument mon = mons.get(0);
+		      request.setAttribute("mon", mon);
 		  }
 		  request.setAttribute("msg", msg);
 		this.getServletContext().getRequestDispatcher(VUE).forward( request, response );

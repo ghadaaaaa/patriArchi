@@ -33,7 +33,8 @@ public class Site extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
 		Ontology ont = new Ontology();
 		try {
 			ont.loadOWLOntology();
@@ -58,8 +59,10 @@ public class Site extends HttpServlet {
 	        {
 			  msg= "Aucun site"; }
 		  else
-		  {System.out.println(site.getAltitude());
-			request.setAttribute("site", site);}
+		  {
+			System.out.println(site.getAltitude());
+			request.setAttribute("site", site);
+		  }
 		  request.setAttribute("msg", msg);
 		this.getServletContext().getRequestDispatcher(VUE).forward( request, response );
 	}

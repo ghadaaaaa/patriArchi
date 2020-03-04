@@ -112,7 +112,7 @@
               Longitude: ${site.longitude}
               </li>
             <li>
-              Surface:
+              Superficie: ${site.surfaceSite}
               </li>
               </ul>
               

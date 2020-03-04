@@ -105,13 +105,15 @@
               </h2>
               <ul>
               <li>
-              Altitude:${esp.altitude}
+              Altitude: ${esp.altitude}
               </li>
              
               <li>
-              Longitude:${esp.longitude}
+              Longitude: ${esp.longitude}
               </li>
-        
+                <li>
+              Type de l'espace: ${esp.typeEspace}
+              </li>
               </ul>
               
              </div>

@@ -190,32 +190,32 @@
 			   var markersMo =[]; 
 			   var markersEsp =[];
 									/*********MAISONS**********/
-			   for (var z=0; z<nomsMa.length; z++) {    
-			    var marker= new L.marker([altitudesMa[z],longitudesMa[z]]).addTo(mymap);
-			    marker.bindPopup(nomsMa[z]).openPopup();
-			    markersMa.push(marker);
-			   }
-		
-			 for ( y=0; y < markersMa.length; y++) {
-				  let new_y = y;
-				  markersMa[y].on('click', function()
-				 { console.log("here", markersMa[new_y]._popup._content);
-			       window.location.href="MaisonMap?appelMa="+markersMa[new_y]._popup._content;
-			     }
-			 )};
+				   for (var z=0; z<nomsMa.length; z++) {    
+				    var marker= new L.marker([altitudesMa[z],longitudesMa[z]]).addTo(mymap);
+				    marker.bindPopup(nomsMa[z]).openPopup();
+				    markersMa.push(marker);
+				   }
+			
+				 for (var  y=0; y < markersMa.length; y++) {
+					  let new_y = y;
+					  markersMa[y].on('click', function()
+					 { console.log("here", markersMa[new_y]._popup._content);
+				       window.location.href="MaisonMap?appelMa="+markersMa[new_y]._popup._content;
+				     }
+				 )};
 			                        /*********SITES**********/
 			                        
 			        for (var b=0; b<nomsSites.length; b++) {    
 				    var marker= new L.marker([altitudesSites[b],longitudesSites[b]]).addTo(mymap);
-				    marker.bindPopup(nomsSites[b]).openPopup();
+				    marker.bindPopup(nomsSites[b]);
 				    markersSites.push(marker);
 				   }
 			                        
-			        for ( c=0; c < markersSites.length; c++) {
+			        for ( var c=0; c < markersSites.length; c++) {
 						  let new_c = c;
-						  markerSites[c].on('click', function()
+						  markersSites[c].on('click', function()
 						 { console.log("here", markersSites[new_c]._popup._content);
-					     //window.location.href="MaisonMap?appelMa="+markersSites[new_c]._popup._content;
+					     window.location.href="SiteMap?appelSite="+markersSites[new_c]._popup._content;
 					     }
 					 )};
 					 
@@ -227,11 +227,11 @@
 					    markersMo.push(marker);
 					   }
 				                        
-				        for ( e=0; e < markersMo.length; e++) {
+				        for ( var e=0; e < markersMo.length; e++) {
 							  let new_e = e;
 							  markersMo[e].on('click', function()
 							 { console.log("here", markersMo[new_e]._popup._content);
-						     //window.location.href="MaisonMap?appelMa="+markersSites[new_c]._popup._content;
+						       window.location.href="MonumentMap?appelMo="+markersMo[new_e]._popup._content;
 						     }
 						 )};
 				   /*********Espaces**********/
@@ -242,11 +242,11 @@
 					    markersEsp.push(marker);
 					   }
 				                        
-				        for ( g=0; g < markersEsp.length; g++) {
+				        for ( var g=0; g < markersEsp.length; g++) {
 							  let new_g = g;
 							  markersEsp[g].on('click', function()
 							 { console.log("here", markersEsp[new_g]._popup._content);
-						     //window.location.href="MaisonMap?appelMa="+markersSites[new_c]._popup._content;
+						       window.location.href="EspaceMap?appelEsp="+markersEsp[new_g]._popup._content;
 						     }
 						 )};
 						 

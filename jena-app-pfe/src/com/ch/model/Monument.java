@@ -16,4 +16,13 @@ public class Monument extends EltPatri
 	
 	}
 
+	public String getTypeMo() {
+		return typeMo;
+	}
+
+	public void setTypeMo(String typeMo) {
+		this.typeMo = typeMo;
+	}
+
+	
 }

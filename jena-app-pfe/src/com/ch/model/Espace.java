@@ -15,4 +15,14 @@ public class Espace extends EltPatri
 		this.typeEspace=typeEspace;
 	
 	}
+
+	public String getTypeEspace() {
+		return typeEspace;
+	}
+
+	public void setTypeEspace(String typeEspace) {
+		this.typeEspace = typeEspace;
+	}
+	
+	
 }

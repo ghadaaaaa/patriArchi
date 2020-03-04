@@ -1,8 +1,12 @@
 package com.ch.controller;
 
+import java.security.Key;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.jena.query.Dataset;
 import org.apache.jena.query.QueryExecution;
@@ -250,14 +254,14 @@ public List<EltPatri> ListeEltsPatriMap(Dataset dataset)
 	 }
 	 
 	 /************************RECHERCHE ESPACE PAR APPELLATION EP*****************/
-	 public List<Espace> rechEspaceParAppel( Dataset dataset, String  appel)
+	 public List<Espace> rechEspaceParAppel( Dataset dataset, String  appelEspace)
 	 {
 		 
 		 dataset.begin(ReadWrite.READ) ;
 		 try
 		
 		 {
-			  String qs1 = "Select ?idEltPatri ?descEltPatri ?altitude ?latitude"
+			  String qs1 = "Select ?idEltPatri ?descEltPatri ?altitude"
 			  		+ "?longitude ?dateConstruction  ?périodeConstruction ?typeEspace where {graph ?g {"
 			 
 	          + "?Espace <http://www.w3.org/ontologies/patriArchi/SappelerEP> ?AppellationEP."          
@@ -268,7 +272,7 @@ public List<EltPatri> ListeEltsPatriMap(Dataset dataset)
 	          + "?Espace <http://www.w3.org/ontologies/patriArchi/dateConstruction> ?dateConstruction."
 	          + "?Espace <http://www.w3.org/ontologies/patriArchi/périodeConstruction> ?périodeConstruction."
 	          + "?Espace  <http://www.w3.org/ontologies/patriArchi/typeEspace> ?typeEspace." 
-	          + "?AppellationEP <http://www.w3.org/ontologies/patriArchi/appelEP> \""+appel+"\" ."
+	          + "?AppellationEP <http://www.w3.org/ontologies/patriArchi/appelEP> \""+appelEspace+"\" ."
 	         + "}}";
 
 			   try(QueryExecution qExec = QueryExecutionFactory.create(qs1, dataset)) {
@@ -796,7 +800,7 @@ public List<EltPatri> ListeEltsPatriMap(Dataset dataset)
 			 try
 			
 			 {
-				  String qs1 = "Select ?idEltPatri  ?descEltPatri ?altitude ?latitude"
+				  String qs1 = "Select ?idEltPatri  ?descEltPatri ?altitude"
 				  		+ "?longitude ?dateConstruction  ?périodeConstruction ?typeMo where {graph ?g {"
 				 
 		          + "?Monument<http://www.w3.org/ontologies/patriArchi/SappelerEP> ?AppellationEP."          
@@ -1062,7 +1066,7 @@ public List<EltPatri> ListeEltsPatriMap(Dataset dataset)
 				
 				 {
 					  String qs1 = "Select ?idEltPatri ?descEltPatri ?altitude ?latitude "
-					  		+ "?longitude ?dateConstruction  ?périodeConstruction ?surfaceSite where {graph ?g {"       
+					  + "?longitude ?dateConstruction  ?périodeConstruction ?surfaceSite where {graph ?g {"       
 			          + "?Site <http://www.w3.org/ontologies/patriArchi/idEltPatri> "+idSite+"." 
 			          + "?Site <http://www.w3.org/ontologies/patriArchi/descEltPatri> ?descEltPatri." 
 			          + "?Site <http://www.w3.org/ontologies/patriArchi/altitude> ?altitude." 
@@ -1070,7 +1074,7 @@ public List<EltPatri> ListeEltsPatriMap(Dataset dataset)
 			          + "?Site <http://www.w3.org/ontologies/patriArchi/dateConstruction> ?dateConstruction."
 			          + "?Site <http://www.w3.org/ontologies/patriArchi/périodeConstruction> ?périodeConstruction."
 			          + "?Site <http://www.w3.org/ontologies/patriArchi/surfaceSite> ?surfaceSite."
-			         + "}}";
+			          + "}}";
 
 					   try(QueryExecution qExec = QueryExecutionFactory.create(qs1, dataset)) {
 					   ResultSet rs = qExec.execSelect() ;
@@ -1104,4 +1108,7 @@ public List<EltPatri> ListeEltsPatriMap(Dataset dataset)
 				 } 
 				 finally { dataset.end() ; }
 			 }
+			
+			
+			/***********************END******************************/
 }
