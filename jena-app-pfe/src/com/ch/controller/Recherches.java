@@ -112,7 +112,7 @@ public List<EltPatri> ListeEltsPatriMap(Dataset dataset)
 		    }
 		 }
 	  
-	 finally {  }
+	 finally { }
 	}
 	
 	
@@ -474,8 +474,7 @@ public List<EltPatri> ListeEltsPatriMap(Dataset dataset)
 	 public List<Maison> listeMaison(Dataset dataset)
 		{
 		   dataset.begin(ReadWrite.READ) ;
-			 try
-			
+			 try		
 			 {
 				 String qs1 = "Select ?idEltPatri ?descEltPatri ?altitude "
 					  		+ "?longitude ?dateConstruction  ?périodeConstruction ?surfaceSol ?surfaceMaison "
@@ -912,8 +911,6 @@ public List<EltPatri> ListeEltsPatriMap(Dataset dataset)
 		 
 		  /**************************Similarité sémantique**************************/
 		 /******************************Recherche par mot clé*******************************/
-		 
-		 
 		 public List<EltPatri> rechParMotCle(Dataset dataset, String motCle)
 		 {  
 			 List<EltPatri> elts = new ArrayList<EltPatri>();
